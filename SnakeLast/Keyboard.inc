@@ -5,13 +5,8 @@
 ; Author : Vador
 ;
 
-updateDir:
-	; 4 steps keyboard check
-	rcall checkKeyboard
-dirUpdated:
-	ret
-
 checkKeyboard:
+	; 4 steps keyboard check
 	; check row 3
 	sbi PORTD,6
 	cbi PORTD,5
@@ -39,31 +34,33 @@ checkKeyboard:
 	rjmp K0pressed
 	sbis PIND,3
 	rjmp KApressed
+
+end_keyboard:
 	ret
 
 K0pressed:
 	; set direction to left
 	ldi V, 0b0000_1000
 	cbi PORTC,3
-	rjmp dirUpdated
+	rjmp end_keyboard
 K3pressed:
 	; set direction to up
 	ldi V, 0b0000_0100
 	cbi PORTC,3
-	rjmp dirUpdated
+	rjmp end_keyboard
 KBpressed:
 	; set direction to down
 	ldi V, 0b0000_0010
 	cbi PORTC,3
-	rjmp dirUpdated
+	rjmp end_keyboard
 KCpressed:
 	; set direction to right
 	ldi V, 0b0000_0001
 	cbi PORTC,3
-	rjmp dirUpdated
+	rjmp end_keyboard
 
 K1pressed:
-	rjmp dirUpdated
+	rjmp end_keyboard
 
 KApressed:
 	; begin button
@@ -75,7 +72,7 @@ KApressed:
 	sts FRUITYADDR, RANDOM_POS
 
 	rcall initialConditions
-	rjmp dirUpdated
+	rjmp end_keyboard
 
 
 

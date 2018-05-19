@@ -29,15 +29,14 @@
  <LABELS>
   <init><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm</FILE><LINE>63</LINE></init>
   <ISRmove><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm</FILE><LINE>109</LINE></ISRmove>
-  <updateDir><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>8</LINE></updateDir>
-  <checkKeyboard><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>14</LINE></checkKeyboard>
-  <dirUpdated><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>11</LINE></dirUpdated>
-  <K3pressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>49</LINE></K3pressed>
-  <K1pressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>65</LINE></K1pressed>
-  <KCpressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>59</LINE></KCpressed>
-  <KBpressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>54</LINE></KBpressed>
-  <K0pressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>44</LINE></K0pressed>
-  <KApressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>68</LINE></KApressed>
+  <checkKeyboard><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>8</LINE></checkKeyboard>
+  <K3pressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>46</LINE></K3pressed>
+  <K1pressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>62</LINE></K1pressed>
+  <KCpressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>56</LINE></KCpressed>
+  <KBpressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>51</LINE></KBpressed>
+  <K0pressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>41</LINE></K0pressed>
+  <KApressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>65</LINE></KApressed>
+  <end_keyboard><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>38</LINE></end_keyboard>
   <randomXpos><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\RandomGen.inc</FILE><LINE>8</LINE></randomXpos>
   <randomYpos><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\RandomGen.inc</FILE><LINE>17</LINE></randomYpos>
   <initialConditions><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm</FILE><LINE>143</LINE></initialConditions>

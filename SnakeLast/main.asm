@@ -91,7 +91,7 @@ init:
 	rjmp main
 
 main:
-	rcall updateDir
+	rcall checkKeyboard
 	cpi GAME_STATE, 0
 	breq game_over
 	play:
