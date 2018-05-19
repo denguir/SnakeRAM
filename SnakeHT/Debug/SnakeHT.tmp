@@ -1,0 +1,93 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.7</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\avrasm\inc\m328pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\Debug\SnakeHT.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>SnakeHT.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>SnakeHT.map</FILE>
+  <FILE>SnakeHT.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <init><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>64</LINE></init>
+  <ISR><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>496</LINE></ISR>
+  <main><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>106</LINE></main>
+  <updateDir><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>373</LINE></updateDir>
+  <display><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>159</LINE></display>
+  <move><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>112</LINE></move>
+  <move_right><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>134</LINE></move_right>
+  <move_left><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>137</LINE></move_left>
+  <move_down><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>143</LINE></move_down>
+  <move_up><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>140</LINE></move_up>
+  <end_move><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>146</LINE></end_move>
+  <go_right><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>257</LINE></go_right>
+  <go_left><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>233</LINE></go_left>
+  <go_up><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>186</LINE></go_up>
+  <go_down><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>209</LINE></go_down>
+  <plot_posX><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>286</LINE></plot_posX>
+  <plot_posY><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>307</LINE></plot_posY>
+  <enableLatch><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>349</LINE></enableLatch>
+  <do_go_up><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>203</LINE></do_go_up>
+  <up_from_top><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>193</LINE></up_from_top>
+  <up_from_bottom><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>198</LINE></up_from_bottom>
+  <go_up_end><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>206</LINE></go_up_end>
+  <go_down_end><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>230</LINE></go_down_end>
+  <do_go_down><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>227</LINE></do_go_down>
+  <down_from_top><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>217</LINE></down_from_top>
+  <down_from_bottom><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>222</LINE></down_from_bottom>
+  <do_go_left><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>250</LINE></do_go_left>
+  <go_to_XMAX><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>239</LINE></go_to_XMAX>
+  <go_left2><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>243</LINE></go_left2>
+  <go_left_end><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>253</LINE></go_left_end>
+  <go_to_X39><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>247</LINE></go_to_X39>
+  <do_go_right><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>274</LINE></do_go_right>
+  <go_to_X0><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>263</LINE></go_to_X0>
+  <go_right2><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>267</LINE></go_right2>
+  <go_right_end><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>277</LINE></go_right_end>
+  <go_to_X40><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>271</LINE></go_to_X40>
+  <comparePosX><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>292</LINE></comparePosX>
+  <foundPosX><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>301</LINE></foundPosX>
+  <write_0><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>329</LINE></write_0>
+  <checkEndPlotX><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>296</LINE></checkEndPlotX>
+  <endPlotX><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>304</LINE></endPlotX>
+  <write_1><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>339</LINE></write_1>
+  <comparePosY><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>313</LINE></comparePosY>
+  <foundPosY><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>322</LINE></foundPosY>
+  <checkEndPlotY><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>317</LINE></checkEndPlotY>
+  <endPlotY><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>325</LINE></endPlotY>
+  <wait><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>357</LINE></wait>
+  <KBCheck1><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>383</LINE></KBCheck1>
+  <KBCheck2><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>388</LINE></KBCheck2>
+  <selectKey><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>459</LINE></selectKey>
+  <compareKey><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>464</LINE></compareKey>
+  <dirUpdated><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>380</LINE></dirUpdated>
+  <configRowKb><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>394</LINE></configRowKb>
+  <readColKb><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>408</LINE></readColKb>
+  <configColKb><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>401</LINE></configColKb>
+  <readRowKb><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>422</LINE></readRowKb>
+  <noKeyPressedCol><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>415</LINE></noKeyPressedCol>
+  <keyPressedCol><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>418</LINE></keyPressedCol>
+  <checkColPressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>437</LINE></checkColPressed>
+  <noKeyPressedRow><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>429</LINE></noKeyPressedRow>
+  <keyPressedRow><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>432</LINE></keyPressedRow>
+  <checkRowPressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>448</LINE></checkRowPressed>
+  <NoKpressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>476</LINE></NoKpressed>
+  <K0pressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>479</LINE></K0pressed>
+  <K3pressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>483</LINE></K3pressed>
+  <KBpressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>487</LINE></KBpressed>
+  <KCpressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeHT\main.asm</FILE><LINE>491</LINE></KCpressed>
+ </LABELS>
+</ASSEMBLER_INFO>

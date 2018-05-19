@@ -1,0 +1,30 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.7</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\RAMtest\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\RAMtest\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\avrasm\inc\m328pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\RAMtest\Debug\RAMtest.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>RAMtest.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>RAMtest.map</FILE>
+  <FILE>RAMtest.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <init><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\RAMtest\main.asm</FILE><LINE>21</LINE></init>
+  <main><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\RAMtest\main.asm</FILE><LINE>41</LINE></main>
+  <ledOn><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\RAMtest\main.asm</FILE><LINE>51</LINE></ledOn>
+  <loop><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\RAMtest\main.asm</FILE><LINE>55</LINE></loop>
+ </LABELS>
+</ASSEMBLER_INFO>
