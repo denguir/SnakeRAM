@@ -37,8 +37,7 @@ deathRules:
 			rjmp for_death
 
 		on_death:
-			; print game over
-			ldi V, 0b0000_0000
+			ldi GAME_STATE, 0 ; game over
 			rjmp death_ended
 
 	death_ended:

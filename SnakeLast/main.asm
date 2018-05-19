@@ -14,6 +14,8 @@
 .def V = R21 
 .def COUNTER_MOVE = R22
 .def LENGTH = R23
+.def GAME_STATE = R24 ; 0: game over, 1: pause, 2: playing
+.def SYMBOL = R25
 ; R26 -> R29 used as pointers X and Y
 
 ; define constants:
@@ -25,6 +27,9 @@
 ; map size
 .equ X_MAX = 79
 .equ Y_MAX = 6
+
+; initial length of snake
+.equ INIT_LENGTH = 3
 
 ; define head SRAM addresses
 .equ HEADXADDR = 0x0100
@@ -86,12 +91,18 @@ init:
 	rjmp main
 
 main:
-	; breq gameState, GAMEOVER
-	; print GAME OVER
-	rcall checkRules
 	rcall updateDir
-	;rcall move ;in ISR
-	rcall display
+	cpi GAME_STATE, 0
+	breq game_over
+	play:
+		rcall checkRules
+		;rcall move ;in ISR
+		rcall display
+		rjmp main
+
+	game_over:
+		rcall displayGameOver
+		rjmp main
 	rjmp main
 
 
@@ -130,14 +141,28 @@ configDebugLed:
 	ret
 
 initialConditions:
+	; initial game state
+	ldi GAME_STATE, 2 ; play 
 	; initial length
-	ldi LENGTH, 5
+	ldi LENGTH, INIT_LENGTH
 
 	; head position initial
 	ldi POS_X, 52
 	ldi POS_Y, 2
-	sts HEADXADDR, POS_X
+	sts HEADXADDR, POS_X 
 	sts HEADYADDR, POS_Y
+
+	; head position initial
+	ldi POS_X, 51
+	ldi POS_Y, 2
+	sts 0x0102, POS_X
+	sts 0x0103, POS_Y
+
+	; head position initial
+	ldi POS_X, 50
+	ldi POS_Y, 2
+	sts 0x0104, POS_X
+	sts 0x0105, POS_Y
 
 	; fruit position initial
 	ldi POS_X, 30
@@ -146,5 +171,5 @@ initialConditions:
 	sts FRUITYADDR2, POS_Y
 
 	; initial direction -> none
-	ldi V, 0b0000_0000
+	ldi V, 0b0000_0001
 	ret

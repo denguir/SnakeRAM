@@ -78,7 +78,7 @@ go_up:
 
 	up_from_top:
 		ldi POS_Y, 6
-		subi POS_X, 216 ; -216 = +40
+		subi POS_X, 216 ; -216 = +40 (offset to change top to down screen)
 		rjmp go_up_end
 
 	up_from_bottom:
@@ -104,7 +104,7 @@ go_down:
 
 	down_from_top:
 		ldi POS_Y, 0
-		subi POS_X, 216 ; -216=+40 add offset to change top to down screen
+		subi POS_X, 216 ; -216=+40 (offset to change top to down screen)
 		rjmp go_down_end
 
 	down_from_bottom:

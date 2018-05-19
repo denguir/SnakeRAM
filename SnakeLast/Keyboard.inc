@@ -21,6 +21,8 @@ checkKeyboard:
 
 	sbis PIND,1
 	rjmp K3pressed
+	sbis PIND,3
+	rjmp K1pressed
 
 	; check row 4
 	cbi PORTD,4
@@ -39,25 +41,30 @@ checkKeyboard:
 	rjmp KApressed
 	ret
 
-NoKpressed:
-	rjmp dirUpdated
-	sbi PORTC,3
 K0pressed:
-	ldi V, 0b0000_1000 ; set direction to left
+	; set direction to left
+	ldi V, 0b0000_1000
 	cbi PORTC,3
 	rjmp dirUpdated
 K3pressed:
-	ldi V, 0b0000_0100 ; set direction to up
+	; set direction to up
+	ldi V, 0b0000_0100
 	cbi PORTC,3
 	rjmp dirUpdated
 KBpressed:
-	ldi V, 0b0000_0010 ; set direction to down
+	; set direction to down
+	ldi V, 0b0000_0010
 	cbi PORTC,3
 	rjmp dirUpdated
 KCpressed:
-	ldi V, 0b0000_0001 ; set direction to right
+	; set direction to right
+	ldi V, 0b0000_0001
 	cbi PORTC,3
 	rjmp dirUpdated
+
+K1pressed:
+	rjmp dirUpdated
+
 KApressed:
 	; begin button
 	lds RANDOM_POS, TCNT1L
@@ -66,7 +73,9 @@ KApressed:
 	lds RANDOM_POS, TCNT1H
 	rcall randomYpos
 	sts FRUITYADDR, RANDOM_POS
-	ldi V, 0b0000_0001 ; start moving
+
+	rcall initialConditions
 	rjmp dirUpdated
+
 
 

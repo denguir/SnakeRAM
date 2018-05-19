@@ -5,7 +5,7 @@
  *   Author: Vador
  */ 
 
- randomXpos:
+randomXpos:
 	; performs a modulo 80 of the random register
 	cpi RANDOM_POS, 80
 	brlo randXend
@@ -24,8 +24,7 @@ randomYpos:
 		ret
 
 nextRandomPos:
-	; pseudo random number generator using Fibonacci series
-
+	; pseudo random number generator using Fibonacci
 	; random x
 	lds POS_X, FRUITXADDR
 	lds POS_Y, FRUITXADDR2

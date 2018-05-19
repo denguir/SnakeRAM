@@ -5,7 +5,6 @@
  *   Author: Vador
  */ 
 
-
  display:
 	ldi XH, HIGH(HEADXADDR)
 	ldi XL, LOW(HEADXADDR)
@@ -118,3 +117,400 @@ wait:
 	ldi R16,COUNTER_OFFSET 
 	out TCNT0,R16 ; set counter init
 	ret */
+
+ displayScore:
+	ret
+
+displayGameOver:
+	; enable columns of row 1
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_1110
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_1111
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_1110
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_1111
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_1110
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_1111
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	; enable row 1
+	rcall enable_row_1
+	rcall enableLatch
+
+	; enable columns of row 2
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_1011
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	; enable row 2
+	rcall enable_row_2
+	rcall enableLatch
+
+	; enable columns of row 3
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0101
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	; enable row 3
+	rcall enable_row_3
+	rcall enableLatch
+
+	; enable columns of row 4
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_1110
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_1111
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_1111
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_1111
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0011
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	; enable row 4
+	rcall enable_row_4
+	rcall enableLatch
+
+	; enable columns of row 5
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0100
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	; enable row 5
+	rcall enable_row_5
+	rcall enableLatch
+
+	; enable columns of row 6
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0010
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_1010
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	; enable row 6
+	rcall enable_row_6
+	rcall enableLatch
+
+	; enable columns of row 7
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_1111
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0100
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_1110
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_1111
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_0001
+	rcall write_symbol
+	ldi SYMBOL, 0b0001_1111
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	ldi SYMBOL, 0b0000_0000
+	rcall write_symbol
+	; enable row 7
+	rcall enable_row_7
+	rcall enableLatch
+	ret
+
+enable_row_1:
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_1
+	ret
+
+enable_row_2:
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_1
+	rcall write_0
+	ret
+
+enable_row_3:
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_1
+	rcall write_0
+	rcall write_0
+	ret
+
+enable_row_4:
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_1
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	ret
+
+enable_row_5:
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_1
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	ret
+
+enable_row_6:
+	rcall write_0
+	rcall write_0
+	rcall write_1
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	ret
+	
+enable_row_7:
+	rcall write_0
+	rcall write_1
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	rcall write_0
+	ret
+
+; all print functions will display a specific character 
+; on one single cell of the matrix led (cell = 7 rows x 5 cols)
+
+write_symbol:
+	; load the value on register SYMBOL and convert it on led symbol
+	; ex : if SYMBOL = 0b01000 -> turn on the second led of selected cell 
+	symb0:
+		sbrs SYMBOL,0 ; skip if bit set
+		rjmp symb0_is_0
+		symb0_is_1:
+			rcall write_1
+	symb1:
+		sbrs SYMBOL,1 ; skip if bit set
+		rjmp symb1_is_0
+		symb1_is_1:
+			rcall write_1
+	symb2:
+		sbrs SYMBOL,2 ; skip if bit set
+		rjmp symb2_is_0
+		symb2_is_1:
+			rcall write_1
+	symb3:
+		sbrs SYMBOL,3 ; skip if bit set
+		rjmp symb3_is_0
+		symb3_is_1:
+			rcall write_1
+	symb4:
+		sbrs SYMBOL,4 ; skip if bit set
+		rjmp symb4_is_0
+		symb4_is_1:
+			rcall write_1
+			rjmp symb_ended
+
+	symb0_is_0:
+		rcall write_0
+		rjmp symb1
+
+	symb1_is_0:
+		rcall write_0
+		rjmp symb2
+
+	symb2_is_0:
+		rcall write_0
+		rjmp symb3
+
+	symb3_is_0:
+		rcall write_0
+		rjmp symb4
+
+	symb4_is_0:
+		rcall write_0
+		rjmp symb_ended
+	
+	symb_ended:
+		ret
