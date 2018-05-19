@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm Sat May 19 11:04:58 2018
+AVRASM ver. 2.2.7  C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm Sat May 19 14:27:11 2018
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\avrasm\inc\m328pdef.inc'
 C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm(9): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\avrasm\inc\m328pdef.inc'
@@ -1056,7 +1056,7 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm(9): 
                                  .def LENGTH = R31
                                  
                                  ; define constants
-                                 .equ COUNTER_OFFSET = 156
+                                 .equ COUNTER_OFFSET = 131
                                  .equ COUNTER_OFFSET_MOVE_L = 0xE6
                                  .equ COUNTER_OFFSET_MOVE_H = 0xF9
                                  ; define map size
@@ -1100,7 +1100,7 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm(9): 
                                  .org 0x0000
 000000 c01a                      	rjmp init
                                  .org 0x001A
-00001a c141                      	rjmp ISR
+00001a c13e                      	rjmp ISR
                                  
                                  init:
                                  	; config pins
@@ -1135,7 +1135,7 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm(9): 
 000033 e090                      	ldi V, 0b0000_0000 ; left Vx, Vy - righth
                                  
                                  	; config display timer 
-000034 e90c                      	ldi R16,COUNTER_OFFSET 
+000034 e803                      	ldi R16,COUNTER_OFFSET 
 000035 bd06                      	out TCNT0,R16 ; set counter init
 000036 e003                      	ldi R16,0b0000_0011 ; set prescaler to 64 (COUNTER_OFFSET = 131 -> f = 2kHz)
 000037 bd05                      	out TCCR0B,R16 ; timer is configured with prescaler 
@@ -1158,8 +1158,8 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm(9): 
                                  main:
                                  	; breq gameState, GAMEOVER
                                  	; print GAME OVER
-000046 d11d                      	rcall checkRules
-000047 d0a7                      	rcall updateDir
+000046 d11a                      	rcall checkRules
+000047 d0a4                      	rcall updateDir
                                  	;rcall move ;in ISR
 000048 d030                      	rcall display
 000049 cffc                      	rjmp main
@@ -1244,7 +1244,7 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm(9): 
 000085 955a                      		dec COUNTER_POS
 000086 cff5                      		rjmp for_display
                                  	display_end:
-                                 		; plot the fruit
+                                 		; plot the fruit and return
 000087 9180 0200                 		lds POS_X, FRUITXADDR
 000089 d03b                      		rcall plot_posX
 00008a 9170 0201                 		lds POS_Y, FRUITYADDR
@@ -1430,13 +1430,20 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm(9): 
 0000e7 9508                      	ret
                                  
                                  wait:
-0000e8 b305                      	in R16,TIFR0 ; read interrupt flag
-0000e9 fb00                      	bst R16,0 ; copy bit 0 (TOV) in T flag
-0000ea f7ee                      	brtc wait
-0000eb bb05                      	out TIFR0, R16
-0000ec e90c                      	ldi R16,COUNTER_OFFSET 
-0000ed bd06                      	out TCNT0,R16 ; set counter init
-0000ee 9508                      	ret ; exit subroutine and go back to rcall
+0000e8 9aa8                      	sbi TIFR0, TOV0 ; set interrupt bit to 1
+                                 	loop_wait:
+0000e9 9ba8                      		sbis TIFR0, TOV0
+0000ea cffe                      		rjmp loop_wait
+0000eb 9508                      	ret
+                                 
+                                 /*wait:
+                                 	in R16,TIFR0 ; read interrupt flag
+                                 	bst R16,0 ; copy bit 0 (TOV) in T flag
+                                 	brtc wait
+                                 	out TIFR0, R16
+                                 	ldi R16,COUNTER_OFFSET 
+                                 	out TCNT0,R16 ; set counter init
+                                 	ret */
                                  
                                  
                                  /*
@@ -1447,166 +1454,166 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm(9): 
                                  
                                  updateDir:
                                  	; 2 steps keyboard check
-0000ef 2744                      	clr SEL_KEY
-0000f0 d004                      	rcall KBCheck1
-0000f1 d006                      	rcall KBCheck2
-0000f2 d036                      	rcall selectKey
-0000f3 c038                      	rjmp compareKey
+0000ec 2744                      	clr SEL_KEY
+0000ed d004                      	rcall KBCheck1
+0000ee d006                      	rcall KBCheck2
+0000ef d036                      	rcall selectKey
+0000f0 c038                      	rjmp compareKey
                                  dirUpdated:
-0000f4 9508                      	ret
+0000f1 9508                      	ret
                                  
                                  KBCheck1:
-0000f5 d005                      	rcall configRowKb
-0000f6 d00e                      	rcall readColKb
-0000f7 9508                      	ret
+0000f2 d005                      	rcall configRowKb
+0000f3 d00e                      	rcall readColKb
+0000f4 9508                      	ret
                                  
                                  KBCheck2:
-0000f8 d007                      	rcall configColKb
-0000f9 d014                      	rcall readRowKb
-0000fa 9508                      	ret
+0000f5 d007                      	rcall configColKb
+0000f6 d014                      	rcall readRowKb
+0000f7 9508                      	ret
                                  	
                                  
                                  configRowKb:
-0000fb ef10                      	ldi KB_REG, 0b1111_0000 ; 4 row output mode, 4 col input mode
-0000fc b91a                      	out DDRD, KB_REG
-0000fd e01f                      	ldi KB_REG, 0b0000_1111 ; rows -> low, cols -> enable pull up resistors
-0000fe b91b                      	out PORTD, KB_REG
-0000ff 9508                      	ret
+0000f8 ef10                      	ldi KB_REG, 0b1111_0000 ; 4 row output mode, 4 col input mode
+0000f9 b91a                      	out DDRD, KB_REG
+0000fa e01f                      	ldi KB_REG, 0b0000_1111 ; rows -> low, cols -> enable pull up resistors
+0000fb b91b                      	out PORTD, KB_REG
+0000fc 9508                      	ret
                                  
                                  configColKb:
-000100 e01f                      	ldi KB_REG, 0b0000_1111 ; 4 col output mode, 4 row input mode
-000101 b91a                      	out DDRD, KB_REG
-000102 e01f                      	ldi KB_REG, 0b0000_1111 ; all cols high, 
-000103 b91b                      	out PORTD, KB_REG
-000104 9508                      	ret
+0000fd e01f                      	ldi KB_REG, 0b0000_1111 ; 4 col output mode, 4 row input mode
+0000fe b91a                      	out DDRD, KB_REG
+0000ff e01f                      	ldi KB_REG, 0b0000_1111 ; all cols high, 
+000100 b91b                      	out PORTD, KB_REG
+000101 9508                      	ret
                                  
                                  readColKb:
-000105 b009                      	in R0, PIND ; read Pin state
-000106 e01f                      	ldi KB_REG, 0b0000_1111 ; max value of PIND
-000107 1910                      	sub KB_REG, R0 ; KB_STATE = 0 if all cols are high
-000108 f009                      	breq noKeyPressedCol ; compare KB_STATE (last register used) with 0
-000109 c002                      	rjmp keyPressedCol
+000102 b009                      	in R0, PIND ; read Pin state
+000103 e01f                      	ldi KB_REG, 0b0000_1111 ; max value of PIND
+000104 1910                      	sub KB_REG, R0 ; KB_STATE = 0 if all cols are high
+000105 f009                      	breq noKeyPressedCol ; compare KB_STATE (last register used) with 0
+000106 c002                      	rjmp keyPressedCol
                                  
                                  	noKeyPressedCol:
-00010a e020                      		ldi SEL_COL, 0x00
-00010b 9508                      		ret
+000107 e020                      		ldi SEL_COL, 0x00
+000108 9508                      		ret
                                  	keyPressedCol:
-00010c d00a                      		rcall checkColPressed
-00010d 9508                      		ret
+000109 d00a                      		rcall checkColPressed
+00010a 9508                      		ret
                                  
                                  readRowKb:
-00010e b009                      	in R0, PIND ; read Pin state
-00010f ef10                      	ldi KB_REG, 0b1111_0000 ; max value of PIND
-000110 1910                      	sub KB_REG, R0 ; KB_STATE = 0 if all cols are high
-000111 f009                      	breq noKeyPressedRow ; compare KB_STATE (last register used) with 0
-000112 c002                      	rjmp keyPressedRow
+00010b b009                      	in R0, PIND ; read Pin state
+00010c ef10                      	ldi KB_REG, 0b1111_0000 ; max value of PIND
+00010d 1910                      	sub KB_REG, R0 ; KB_STATE = 0 if all cols are high
+00010e f009                      	breq noKeyPressedRow ; compare KB_STATE (last register used) with 0
+00010f c002                      	rjmp keyPressedRow
                                  
                                  	noKeyPressedRow:
-000113 e030                      		ldi SEL_ROW, 0x00
-000114 9508                      		ret
+000110 e030                      		ldi SEL_ROW, 0x00
+000111 9508                      		ret
                                  	keyPressedRow:
-000115 d00a                      		rcall checkRowPressed
-000116 9508                      		ret
+000112 d00a                      		rcall checkRowPressed
+000113 9508                      		ret
                                  
                                  
                                  checkColPressed:
-000117 9b48                      	sbis PIND,0
-000118 e021                      	ldi SEL_COL, 0b0000_0001
-000119 9b49                      	sbis PIND,1
-00011a e022                      	ldi SEL_COL, 0b0000_0010
-00011b 9b4a                      	sbis PIND,2
-00011c e024                      	ldi SEL_COL, 0b0000_0100
-00011d 9b4b                      	sbis PIND,3
-00011e e028                      	ldi SEL_COL, 0b0000_1000
-00011f 9508                      	ret
+000114 9b48                      	sbis PIND,0
+000115 e021                      	ldi SEL_COL, 0b0000_0001
+000116 9b49                      	sbis PIND,1
+000117 e022                      	ldi SEL_COL, 0b0000_0010
+000118 9b4a                      	sbis PIND,2
+000119 e024                      	ldi SEL_COL, 0b0000_0100
+00011a 9b4b                      	sbis PIND,3
+00011b e028                      	ldi SEL_COL, 0b0000_1000
+00011c 9508                      	ret
                                  
                                  checkRowPressed:
-000120 994c                      	sbic PIND,4
-000121 e130                      	ldi SEL_ROW, 0b0001_0000
-000122 994d                      	sbic PIND,5
-000123 e230                      	ldi SEL_ROW, 0b0010_0000
-000124 994e                      	sbic PIND,6
-000125 e430                      	ldi SEL_ROW, 0b0100_0000
-000126 994f                      	sbic PIND,7
-000127 e830                      	ldi SEL_ROW, 0b1000_0000
-000128 9508                      	ret
+00011d 994c                      	sbic PIND,4
+00011e e130                      	ldi SEL_ROW, 0b0001_0000
+00011f 994d                      	sbic PIND,5
+000120 e230                      	ldi SEL_ROW, 0b0010_0000
+000121 994e                      	sbic PIND,6
+000122 e430                      	ldi SEL_ROW, 0b0100_0000
+000123 994f                      	sbic PIND,7
+000124 e830                      	ldi SEL_ROW, 0b1000_0000
+000125 9508                      	ret
                                  
                                  selectKey:
-000129 0f42                      	add SEL_KEY, SEL_COL
-00012a 0f43                      	add SEL_KEY, SEL_ROW
-00012b 9508                      	ret
+000126 0f42                      	add SEL_KEY, SEL_COL
+000127 0f43                      	add SEL_KEY, SEL_ROW
+000128 9508                      	ret
                                  
                                  compareKey:
-00012c 3040                      	cpi SEL_KEY, NO_K
-00012d f051                      		breq NoKpressed
-00012e 3144                      	cpi SEL_KEY, K0
-00012f f051                      		breq K0pressed
-000130 3242                      	cpi SEL_KEY, K3
-000131 f059                      		breq K3pressed
-000132 3142                      	cpi SEL_KEY, KB
-000133 f061                      		breq KBpressed
-000134 3141                      	cpi SEL_KEY, KC
-000135 f069                      		breq KCpressed
-000136 3148                      	cpi SEL_KEY, KA
-000137 f071                      		breq KApressed
+000129 3040                      	cpi SEL_KEY, NO_K
+00012a f051                      		breq NoKpressed
+00012b 3144                      	cpi SEL_KEY, K0
+00012c f051                      		breq K0pressed
+00012d 3242                      	cpi SEL_KEY, K3
+00012e f059                      		breq K3pressed
+00012f 3142                      	cpi SEL_KEY, KB
+000130 f061                      		breq KBpressed
+000131 3141                      	cpi SEL_KEY, KC
+000132 f069                      		breq KCpressed
+000133 3148                      	cpi SEL_KEY, KA
+000134 f071                      		breq KApressed
                                  
                                  NoKpressed:
-000138 cfbb                      	rjmp dirUpdated
-000139 9a43                      	sbi PORTC,3
+000135 cfbb                      	rjmp dirUpdated
+000136 9a43                      	sbi PORTC,3
                                  K0pressed:
-00013a e098                      	ldi V, 0b0000_1000 ; set direction to left
-00013b 9843                      	cbi PORTC,3
-00013c cfb7                      	rjmp dirUpdated
+000137 e098                      	ldi V, 0b0000_1000 ; set direction to left
+000138 9843                      	cbi PORTC,3
+000139 cfb7                      	rjmp dirUpdated
                                  K3pressed:
-00013d e094                      	ldi V, 0b0000_0100 ; set direction to up
-00013e 9843                      	cbi PORTC,3
-00013f cfb4                      	rjmp dirUpdated
+00013a e094                      	ldi V, 0b0000_0100 ; set direction to up
+00013b 9843                      	cbi PORTC,3
+00013c cfb4                      	rjmp dirUpdated
                                  KBpressed:
-000140 e092                      	ldi V, 0b0000_0010 ; set direction to down
-000141 9843                      	cbi PORTC,3
-000142 cfb1                      	rjmp dirUpdated
+00013d e092                      	ldi V, 0b0000_0010 ; set direction to down
+00013e 9843                      	cbi PORTC,3
+00013f cfb1                      	rjmp dirUpdated
                                  KCpressed:
-000143 e091                      	ldi V, 0b0000_0001 ; set direction to right
-000144 9843                      	cbi PORTC,3
-000145 cfae                      	rjmp dirUpdated
+000140 e091                      	ldi V, 0b0000_0001 ; set direction to right
+000141 9843                      	cbi PORTC,3
+000142 cfae                      	rjmp dirUpdated
                                  KApressed:
                                  	; begin button
-000146 9160 0084                 	lds RANDOM_POS, TCNT1L
-000148 d009                      	rcall randomXpos
-000149 9360 0200                 	sts FRUITXADDR, RANDOM_POS
-00014b 9160 0085                 	lds RANDOM_POS, TCNT1H
-00014d d009                      	rcall randomYpos
-00014e 9360 0201                 	sts FRUITYADDR, RANDOM_POS
-000150 e091                      	ldi V, 0b0000_0001 ; start moving
-000151 cfa2                      	rjmp dirUpdated
+000143 9160 0084                 	lds RANDOM_POS, TCNT1L
+000145 d009                      	rcall randomXpos
+000146 9360 0200                 	sts FRUITXADDR, RANDOM_POS
+000148 9160 0085                 	lds RANDOM_POS, TCNT1H
+00014a d009                      	rcall randomYpos
+00014b 9360 0201                 	sts FRUITYADDR, RANDOM_POS
+00014d e091                      	ldi V, 0b0000_0001 ; start moving
+00014e cfa2                      	rjmp dirUpdated
                                  
                                  randomXpos:
                                  	; performs a modulo 80 of the random register
-000152 3560                      	cpi RANDOM_POS, 80
-000153 f010                      	brlo randXend
-000154 5560                      	subi RANDOM_POS, 80
-000155 cffc                      	rjmp randomXpos
+00014f 3560                      	cpi RANDOM_POS, 80
+000150 f010                      	brlo randXend
+000151 5560                      	subi RANDOM_POS, 80
+000152 cffc                      	rjmp randomXpos
                                  	randXend:
-000156 9508                      		ret
+000153 9508                      		ret
                                  
                                  randomYpos:
                                  	; performs a modulo 7 of the random register
-000157 3067                      	cpi RANDOM_POS, 7
-000158 f010                      	brlo randYend
-000159 5067                      	subi RANDOM_POS, 7
-00015a cffc                      	rjmp randomYpos
+000154 3067                      	cpi RANDOM_POS, 7
+000155 f010                      	brlo randYend
+000156 5067                      	subi RANDOM_POS, 7
+000157 cffc                      	rjmp randomYpos
                                  	randYend:
-00015b 9508                      		ret
+000158 9508                      		ret
                                  
                                  
                                  ISR:
                                  	;cbi PORTC,2 ; switch led 2
-00015c deed                      	rcall move
-00015d ef09                      	ldi R16, COUNTER_OFFSET_MOVE_H
-00015e 9300 0085                 	sts TCNT1H,R16
-000160 ee06                      	ldi R16, COUNTER_OFFSET_MOVE_L
-000161 9300 0084                 	sts TCNT1L,R16
-000163 9518                      	reti
+000159 def0                      	rcall move
+00015a ef09                      	ldi R16, COUNTER_OFFSET_MOVE_H
+00015b 9300 0085                 	sts TCNT1H,R16
+00015d ee06                      	ldi R16, COUNTER_OFFSET_MOVE_L
+00015e 9300 0084                 	sts TCNT1L,R16
+000160 9518                      	reti
                                  
                                  /*
                                  ############################
@@ -1615,141 +1622,96 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm(9): 
                                  */
                                  
                                  checkRules:
-000164 d002                      	rcall deathRules
-000165 d019                      	rcall eatRules
-000166 9508                      	ret
+000161 d002                      	rcall deathRules
+000162 d019                      	rcall eatRules
+000163 9508                      	ret
                                  
                                  deathRules:
                                  	; here POS_X and POS_Y are just registers with different meaning
-000167 e0d1                      	ldi YH, HIGH(HEADYADDR)
-000168 e0c1                      	ldi YL, LOW(HEADYADDR)
-000169 95c3                      	inc YL ; to jump on body address
-00016a 2fef                      	mov COUNTER_MOVE, LENGTH
+000164 e0d1                      	ldi YH, HIGH(HEADYADDR)
+000165 e0c1                      	ldi YL, LOW(HEADYADDR)
+000166 95c3                      	inc YL ; to jump on body address
+000167 2fef                      	mov COUNTER_MOVE, LENGTH
                                  	for_death:
-00016b 9180 0100                 		lds POS_X, HEADXADDR
-00016d 30e1                      		cpi COUNTER_MOVE, 1
-00016e f079                      		breq death_ended
-00016f 9179                      		ld POS_Y, Y+ ; POS_Y contains the X pos of next point
-000170 1787                      		cp POS_X, POS_Y
-000171 f019                      		breq collision_x
-000172 95c3                      		inc YL ; to check next X
-000173 95ea                      		dec COUNTER_MOVE
-000174 cff6                      		rjmp for_death
+000168 9180 0100                 		lds POS_X, HEADXADDR
+00016a 30e1                      		cpi COUNTER_MOVE, 1
+00016b f079                      		breq death_ended
+00016c 9179                      		ld POS_Y, Y+ ; POS_Y contains the X pos of next point
+00016d 1787                      		cp POS_X, POS_Y
+00016e f019                      		breq collision_x
+00016f 95c3                      		inc YL ; to check next X
+000170 95ea                      		dec COUNTER_MOVE
+000171 cff6                      		rjmp for_death
                                  
                                  		collision_x:
                                  			; check for xy collision
-000175 9180 0101                 			lds POS_X, HEADYADDR
-000177 9179                      			ld POS_Y, Y+ ; POS_Y contains the Y pos of body point
-000178 1787                      			cp POS_X, POS_Y
-000179 f011                      			breq on_death
-00017a 95ea                      			dec COUNTER_MOVE
-00017b cfef                      			rjmp for_death
+000172 9180 0101                 			lds POS_X, HEADYADDR
+000174 9179                      			ld POS_Y, Y+ ; POS_Y contains the Y pos of body point
+000175 1787                      			cp POS_X, POS_Y
+000176 f011                      			breq on_death
+000177 95ea                      			dec COUNTER_MOVE
+000178 cfef                      			rjmp for_death
                                  
                                  		on_death:
                                  			; print game over
-00017c e090                      			ldi V, 0b0000_0000
-00017d c000                      			rjmp death_ended
+000179 e090                      			ldi V, 0b0000_0000
+00017a c000                      			rjmp death_ended
                                  
                                  	death_ended:
-00017e 9508                      	ret
+00017b 9508                      	ret
                                  
                                  
                                  eatRules:
                                  	; here POS_X and POS_Y are just registers with different meaning
-00017f 9180 0100                 	lds POS_X, HEADXADDR
-000181 9170 0200                 	lds POS_Y, FRUITXADDR
+00017c 9180 0100                 	lds POS_X, HEADXADDR
+00017e 9170 0200                 	lds POS_Y, FRUITXADDR
                                  	; check if matching in x positions
-000183 1787                      	cp POS_X, POS_Y
-000184 f009                      	breq match_pos_x
-000185 c00a                      	rjmp eat_ended
+000180 1787                      	cp POS_X, POS_Y
+000181 f009                      	breq match_pos_x
+000182 c00a                      	rjmp eat_ended
                                  
                                  	match_pos_x:
                                  		; check if matching in y positions
-000186 9180 0101                 		lds POS_X, HEADYADDR
-000188 9170 0201                 		lds POS_Y, FRUITYADDR
-00018a 1787                      		cp POS_X, POS_Y
-00018b f009                      		breq match_pos_xy
-00018c c003                      		rjmp eat_ended
+000183 9180 0101                 		lds POS_X, HEADYADDR
+000185 9170 0201                 		lds POS_Y, FRUITYADDR
+000187 1787                      		cp POS_X, POS_Y
+000188 f009                      		breq match_pos_xy
+000189 c003                      		rjmp eat_ended
                                  
                                  	match_pos_xy:
                                  		; if both x and y pos matched
-00018d d003                      		rcall nextRandomPos
-00018e 95f3                      		inc LENGTH
-00018f c000                      		rjmp eat_ended
+00018a d003                      		rcall nextRandomPos
+00018b 95f3                      		inc LENGTH
+00018c c000                      		rjmp eat_ended
                                  
                                  	eat_ended:
-000190 9508                      		ret
+00018d 9508                      		ret
                                  
                                  nextRandomPos:
                                  	; pseudo random number generator using Fibonacci
                                  	; random x
-000191 9180 0200                 	lds POS_X, FRUITXADDR
-000193 9170 0202                 	lds POS_Y, FRUITXADDR2
-000195 938f                      	push POS_X
-000196 0f87                      	add POS_X, POS_Y
-000197 2f68                      	mov RANDOM_POS, POS_X
-000198 918f                      	pop POS_X
-000199 dfb8                      	rcall randomXpos
-00019a 9360 0200                 	sts FRUITXADDR, RANDOM_POS
-00019c 9380 0202                 	sts FRUITXADDR2, POS_X
+00018e 9180 0200                 	lds POS_X, FRUITXADDR
+000190 9170 0202                 	lds POS_Y, FRUITXADDR2
+000192 938f                      	push POS_X
+000193 0f87                      	add POS_X, POS_Y
+000194 2f68                      	mov RANDOM_POS, POS_X
+000195 918f                      	pop POS_X
+000196 dfb8                      	rcall randomXpos
+000197 9360 0200                 	sts FRUITXADDR, RANDOM_POS
+000199 9380 0202                 	sts FRUITXADDR2, POS_X
                                  	
                                  	; random y
-00019e 9170 0201                 	lds POS_Y, FRUITYADDR
-0001a0 9180 0203                 	lds POS_X, FRUITYADDR2
-0001a2 937f                      	push POS_Y
-0001a3 0f78                      	add POS_Y, POS_X
-0001a4 2f67                      	mov RANDOM_POS, POS_Y
-0001a5 917f                      	pop POS_Y
-0001a6 dfb0                      	rcall randomYpos
-0001a7 9360 0201                 	sts FRUITYADDR, RANDOM_POS
-0001a9 9370 0203                 	sts FRUITYADDR2, POS_Y
-0001ab 9508                      	ret
+00019b 9170 0201                 	lds POS_Y, FRUITYADDR
+00019d 9180 0203                 	lds POS_X, FRUITYADDR2
+00019f 937f                      	push POS_Y
+0001a0 0f78                      	add POS_Y, POS_X
+0001a1 2f67                      	mov RANDOM_POS, POS_Y
+0001a2 917f                      	pop POS_Y
+0001a3 dfb0                      	rcall randomYpos
+0001a4 9360 0201                 	sts FRUITYADDR, RANDOM_POS
+0001a6 9370 0203                 	sts FRUITYADDR2, POS_Y
+0001a8 9508                      	ret
                                  
-                                 /*nextRandomPos:
-                                 	; pseudo random number generator using Neuman (not working)
-                                 	lds POS_X, FRUITXADDR
-                                 	lds POS_Y, FRUITYADDR
-                                 
-                                 	; random X position
-                                 	mul POS_X, POS_X ; result in R1:R0
-                                 	; shift right R0 4 times
-                                 	lsr R0
-                                 	lsr R0
-                                 	lsr R0
-                                 	lsr R0
-                                 	; shift left R1 4 times
-                                 	lsl R1
-                                 	lsl R1
-                                 	lsl R1
-                                 	lsl R1
-                                 	; we get the middle bits of the product
-                                 	add R1,R0
-                                 	mov RANDOM_POS, R1
-                                 	; apply modulo 80 for x pos
-                                 	rcall randomXpos
-                                 	mov POS_X, RANDOM_POS
-                                 
-                                 	; random Y position
-                                 	mul POS_Y, POS_Y ; result in R1:R0
-                                 	; shift right R0 4 times
-                                 	lsr R0
-                                 	lsr R0
-                                 	lsr R0
-                                 	lsr R0
-                                 	; shift left R1 4 times
-                                 	lsl R1
-                                 	lsl R1
-                                 	lsl R1
-                                 	lsl R1
-                                 	; we get the middle bits of the product
-                                 	add R1,R0
-                                 	mov RANDOM_POS, R1
-                                 	; apply modulo 7 for y pos
-                                 	rcall randomYpos
-                                 	mov POS_Y, RANDOM_POS
-                                 
-                                 	sts FRUITXADDR, POS_X
-                                 	sts FRUITYADDR, POS_Y
 
 
 RESOURCE USE INFORMATION
@@ -1769,7 +1731,7 @@ counted separately from r26..r31 here.
 "ATmega328P" register use summary:
 x  :   2 y  :   8 z  :   0 r0 :   4 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  21 r17:  12 r18:   6 r19:   6 r20:   9 
+r13:   0 r14:   0 r15:   0 r16:  16 r17:  12 r18:   6 r19:   6 r20:   9 
 r21:  13 r22:  12 r23:  36 r24:  44 r25:  11 r26:   1 r27:   1 r28:   6 
 r29:   3 r30:  10 r31:  12 
 Registers used: 19 out of 35 (54.3%)
@@ -1779,27 +1741,27 @@ Registers used: 19 out of 35 (54.3%)
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
 brcc  :   0 brcs  :   0 break :   0 breq  :  30 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   2 brlt  :   0 brmi  :   2 
-brne  :   0 brpl  :   0 brsh  :   0 brtc  :   1 brts  :   0 brvc  :   0 
-brvs  :   0 bset  :   0 bst   :   1 call  :   0 cbi   :  11 cbr   :   0 
+brne  :   0 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
+brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :  11 cbr   :   0 
 clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   1 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   6 cpc   :   0 
 cpi   :  26 cpse  :   0 dec   :   9 eor   :   0 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :   3 inc   :   5 jmp   :   0 
-ld    :   6 ldd   :   0 ldi   :  55 lds   :  14 lpm   :   0 lsl   :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   2 inc   :   5 jmp   :   0 
+ld    :   6 ldd   :   0 ldi   :  54 lds   :  14 lpm   :   0 lsl   :   0 
 lsr   :   0 mov   :   6 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :   8 pop   :   6 
-push  :   6 rcall :  36 ret   :  30 reti  :   1 rjmp  :  51 rol   :   0 
-ror   :   0 sbc   :   0 sbci  :   0 sbi   :  13 sbic  :   4 sbis  :   4 
+neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :   6 pop   :   6 
+push  :   6 rcall :  36 ret   :  30 reti  :   1 rjmp  :  52 rol   :   0 
+ror   :   0 sbc   :   0 sbci  :   0 sbi   :  14 sbic  :   4 sbis  :   5 
 sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   1 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
 sez   :   0 sleep :   0 spm   :   0 st    :   4 std   :   0 sts   :  16 
 sub   :   2 subi  :   7 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 32 out of 113 (28.3%)
+Instructions used: 30 out of 113 (26.5%)
 
 "ATmega328P" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000358    806      0    806   32768   2.5%
+[.cseg] 0x000000 0x000352    800      0    800   32768   2.4%
 [.dseg] 0x000100 0x000100      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 

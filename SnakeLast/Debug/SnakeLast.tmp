@@ -1,0 +1,112 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.7</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\avrasm\inc\m328pdef.inc</FILE>
+  <FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE>
+  <FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE>
+  <FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Display.inc</FILE>
+  <FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Rules.inc</FILE>
+  <FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\RandomGen.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Debug\SnakeLast.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>SnakeLast.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>SnakeLast.map</FILE>
+  <FILE>SnakeLast.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <init><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm</FILE><LINE>58</LINE></init>
+  <ISRmove><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm</FILE><LINE>98</LINE></ISRmove>
+  <updateDir><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>8</LINE></updateDir>
+  <checkKeyboard><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>14</LINE></checkKeyboard>
+  <dirUpdated><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>11</LINE></dirUpdated>
+  <K3pressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>49</LINE></K3pressed>
+  <KCpressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>57</LINE></KCpressed>
+  <KBpressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>53</LINE></KBpressed>
+  <K0pressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>45</LINE></K0pressed>
+  <KApressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>61</LINE></KApressed>
+  <NoKpressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Keyboard.inc</FILE><LINE>42</LINE></NoKpressed>
+  <randomXpos><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\RandomGen.inc</FILE><LINE>8</LINE></randomXpos>
+  <randomYpos><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\RandomGen.inc</FILE><LINE>17</LINE></randomYpos>
+  <move><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>8</LINE></move>
+  <for_move><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>17</LINE></for_move>
+  <do_move><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>27</LINE></do_move>
+  <move_right><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>39</LINE></move_right>
+  <move_left><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>42</LINE></move_left>
+  <move_down><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>48</LINE></move_down>
+  <move_up><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>45</LINE></move_up>
+  <end_move><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>51</LINE></end_move>
+  <go_right><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>142</LINE></go_right>
+  <go_left><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>121</LINE></go_left>
+  <go_up><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>70</LINE></go_up>
+  <go_down><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>95</LINE></go_down>
+  <for_end_move><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>55</LINE></for_end_move>
+  <do_end_move><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>64</LINE></do_end_move>
+  <boundary_up><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>74</LINE></boundary_up>
+  <do_go_up><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>89</LINE></do_go_up>
+  <up_from_top><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>79</LINE></up_from_top>
+  <up_from_bottom><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>84</LINE></up_from_bottom>
+  <go_up_end><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>92</LINE></go_up_end>
+  <boundary_down><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>100</LINE></boundary_down>
+  <do_go_down><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>115</LINE></do_go_down>
+  <down_from_top><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>105</LINE></down_from_top>
+  <down_from_bottom><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>110</LINE></down_from_bottom>
+  <go_down_end><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>118</LINE></go_down_end>
+  <boudary_up_left><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>128</LINE></boudary_up_left>
+  <boudary_down_left><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>132</LINE></boudary_down_left>
+  <do_go_left><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>136</LINE></do_go_left>
+  <go_left_end><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>139</LINE></go_left_end>
+  <boudary_up_right><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>149</LINE></boudary_up_right>
+  <boudary_down_right><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>153</LINE></boudary_down_right>
+  <do_go_right><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>157</LINE></do_go_right>
+  <go_right_end><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Move.inc</FILE><LINE>161</LINE></go_right_end>
+  <display><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Display.inc</FILE><LINE>9</LINE></display>
+  <for_display><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Display.inc</FILE><LINE>14</LINE></for_display>
+  <display_end><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Display.inc</FILE><LINE>26</LINE></display_end>
+  <plot_posX><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Display.inc</FILE><LINE>35</LINE></plot_posX>
+  <plot_posY><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Display.inc</FILE><LINE>56</LINE></plot_posY>
+  <enableLatch><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Display.inc</FILE><LINE>98</LINE></enableLatch>
+  <comparePosX><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Display.inc</FILE><LINE>41</LINE></comparePosX>
+  <foundPosX><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Display.inc</FILE><LINE>50</LINE></foundPosX>
+  <write_0><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Display.inc</FILE><LINE>78</LINE></write_0>
+  <checkEndPlotX><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Display.inc</FILE><LINE>45</LINE></checkEndPlotX>
+  <endPlotX><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Display.inc</FILE><LINE>53</LINE></endPlotX>
+  <write_1><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Display.inc</FILE><LINE>88</LINE></write_1>
+  <comparePosY><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Display.inc</FILE><LINE>62</LINE></comparePosY>
+  <foundPosY><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Display.inc</FILE><LINE>71</LINE></foundPosY>
+  <checkEndPlotY><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Display.inc</FILE><LINE>66</LINE></checkEndPlotY>
+  <endPlotY><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Display.inc</FILE><LINE>74</LINE></endPlotY>
+  <wait><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Display.inc</FILE><LINE>106</LINE></wait>
+  <loop_wait><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Display.inc</FILE><LINE>108</LINE></loop_wait>
+  <checkRules><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Rules.inc</FILE><LINE>8</LINE></checkRules>
+  <deathRules><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Rules.inc</FILE><LINE>13</LINE></deathRules>
+  <eatRules><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Rules.inc</FILE><LINE>48</LINE></eatRules>
+  <for_death><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Rules.inc</FILE><LINE>19</LINE></for_death>
+  <death_ended><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Rules.inc</FILE><LINE>44</LINE></death_ended>
+  <collision_x><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Rules.inc</FILE><LINE>30</LINE></collision_x>
+  <on_death><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Rules.inc</FILE><LINE>39</LINE></on_death>
+  <match_pos_x><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Rules.inc</FILE><LINE>57</LINE></match_pos_x>
+  <eat_ended><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Rules.inc</FILE><LINE>71</LINE></eat_ended>
+  <match_pos_xy><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\Rules.inc</FILE><LINE>65</LINE></match_pos_xy>
+  <nextRandomPos><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\RandomGen.inc</FILE><LINE>26</LINE></nextRandomPos>
+  <randXend><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\RandomGen.inc</FILE><LINE>14</LINE></randXend>
+  <randYend><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\RandomGen.inc</FILE><LINE>23</LINE></randYend>
+  <configDispPin><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm</FILE><LINE>115</LINE></configDispPin>
+  <configRowKb><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm</FILE><LINE>108</LINE></configRowKb>
+  <configDebugLed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm</FILE><LINE>124</LINE></configDebugLed>
+  <initialConditions><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm</FILE><LINE>132</LINE></initialConditions>
+  <main><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm</FILE><LINE>88</LINE></main>
+ </LABELS>
+</ASSEMBLER_INFO>

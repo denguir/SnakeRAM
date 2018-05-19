@@ -23,10 +23,10 @@
  </OUTPUT_FILES>
  <LABELS>
   <init><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>72</LINE></init>
-  <ISR><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>569</LINE></ISR>
+  <ISR><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>576</LINE></ISR>
   <main><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>125</LINE></main>
-  <checkRules><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>584</LINE></checkRules>
-  <updateDir><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>415</LINE></updateDir>
+  <checkRules><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>591</LINE></checkRules>
+  <updateDir><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>422</LINE></updateDir>
   <display><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>196</LINE></display>
   <move><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>134</LINE></move>
   <for_move><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>143</LINE></for_move>
@@ -76,40 +76,41 @@
   <checkEndPlotY><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>359</LINE></checkEndPlotY>
   <endPlotY><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>367</LINE></endPlotY>
   <wait><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>399</LINE></wait>
-  <KBCheck1><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>425</LINE></KBCheck1>
-  <KBCheck2><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>430</LINE></KBCheck2>
-  <selectKey><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>501</LINE></selectKey>
-  <compareKey><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>506</LINE></compareKey>
-  <dirUpdated><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>422</LINE></dirUpdated>
-  <configRowKb><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>436</LINE></configRowKb>
-  <readColKb><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>450</LINE></readColKb>
-  <configColKb><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>443</LINE></configColKb>
-  <readRowKb><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>464</LINE></readRowKb>
-  <noKeyPressedCol><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>457</LINE></noKeyPressedCol>
-  <keyPressedCol><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>460</LINE></keyPressedCol>
-  <checkColPressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>479</LINE></checkColPressed>
-  <noKeyPressedRow><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>471</LINE></noKeyPressedRow>
-  <keyPressedRow><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>474</LINE></keyPressedRow>
-  <checkRowPressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>490</LINE></checkRowPressed>
-  <NoKpressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>520</LINE></NoKpressed>
-  <K0pressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>523</LINE></K0pressed>
-  <K3pressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>527</LINE></K3pressed>
-  <KBpressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>531</LINE></KBpressed>
-  <KCpressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>535</LINE></KCpressed>
-  <KApressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>539</LINE></KApressed>
-  <randomXpos><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>550</LINE></randomXpos>
-  <randomYpos><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>559</LINE></randomYpos>
-  <randXend><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>556</LINE></randXend>
-  <randYend><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>565</LINE></randYend>
-  <deathRules><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>589</LINE></deathRules>
-  <eatRules><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>624</LINE></eatRules>
-  <for_death><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>595</LINE></for_death>
-  <death_ended><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>620</LINE></death_ended>
-  <collision_x><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>606</LINE></collision_x>
-  <on_death><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>615</LINE></on_death>
-  <match_pos_x><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>633</LINE></match_pos_x>
-  <eat_ended><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>647</LINE></eat_ended>
-  <match_pos_xy><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>641</LINE></match_pos_xy>
-  <nextRandomPos><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>650</LINE></nextRandomPos>
+  <loop_wait><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>401</LINE></loop_wait>
+  <KBCheck1><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>432</LINE></KBCheck1>
+  <KBCheck2><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>437</LINE></KBCheck2>
+  <selectKey><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>508</LINE></selectKey>
+  <compareKey><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>513</LINE></compareKey>
+  <dirUpdated><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>429</LINE></dirUpdated>
+  <configRowKb><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>443</LINE></configRowKb>
+  <readColKb><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>457</LINE></readColKb>
+  <configColKb><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>450</LINE></configColKb>
+  <readRowKb><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>471</LINE></readRowKb>
+  <noKeyPressedCol><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>464</LINE></noKeyPressedCol>
+  <keyPressedCol><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>467</LINE></keyPressedCol>
+  <checkColPressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>486</LINE></checkColPressed>
+  <noKeyPressedRow><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>478</LINE></noKeyPressedRow>
+  <keyPressedRow><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>481</LINE></keyPressedRow>
+  <checkRowPressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>497</LINE></checkRowPressed>
+  <NoKpressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>527</LINE></NoKpressed>
+  <K0pressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>530</LINE></K0pressed>
+  <K3pressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>534</LINE></K3pressed>
+  <KBpressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>538</LINE></KBpressed>
+  <KCpressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>542</LINE></KCpressed>
+  <KApressed><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>546</LINE></KApressed>
+  <randomXpos><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>557</LINE></randomXpos>
+  <randomYpos><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>566</LINE></randomYpos>
+  <randXend><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>563</LINE></randXend>
+  <randYend><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>572</LINE></randYend>
+  <deathRules><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>596</LINE></deathRules>
+  <eatRules><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>631</LINE></eatRules>
+  <for_death><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>602</LINE></for_death>
+  <death_ended><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>627</LINE></death_ended>
+  <collision_x><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>613</LINE></collision_x>
+  <on_death><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>622</LINE></on_death>
+  <match_pos_x><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>640</LINE></match_pos_x>
+  <eat_ended><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>654</LINE></eat_ended>
+  <match_pos_xy><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>648</LINE></match_pos_xy>
+  <nextRandomPos><FILE>C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\randomGenerator\main.asm</FILE><LINE>657</LINE></nextRandomPos>
  </LABELS>
 </ASSEMBLER_INFO>

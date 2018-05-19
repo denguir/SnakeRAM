@@ -1,12 +1,14 @@
 
-AVRASM ver. 2.2.7  C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakePointer\main.asm Sat May 19 14:27:11 2018
+AVRASM ver. 2.2.7  C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeFinal\main.asm Sat May 19 13:19:27 2018
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\avrasm\inc\m328pdef.inc'
-C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakePointer\main.asm(9): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\avrasm\inc\m328pdef.inc'
-C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakePointer\main.asm(22): warning: Register r30 already defined by the .DEF directive
-C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakePointer\main.asm(23): warning: Register r31 already defined by the .DEF directive
+C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeFinal\main.asm(9): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\avrasm\inc\m328pdef.inc'
+C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeFinal\main.asm(23): warning: Register r30 already defined by the .DEF directive
+C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeFinal\main.asm(24): warning: Register r31 already defined by the .DEF directive
+C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeFinal\main.asm(73): Including file 'C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeFinal\Keyboard.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\avrasm\inc\m328pdef.inc'
-C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakePointer\main.asm(9): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\avrasm\inc\m328pdef.inc'
+C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeFinal\main.asm(9): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\avrasm\inc\m328pdef.inc'
+C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeFinal\main.asm(73): Including file 'C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeFinal\Keyboard.inc'
                                  
                                  ;
                                  
@@ -1041,13 +1043,14 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakePointer\main.asm(9): Inc
                                  
                                  ; ***** END OF FILE ******************************************************
                                  
+                                 
                                  ; define registers
                                  .def KB_REG = R17
                                  .def SEL_COL = R18
                                  .def SEL_ROW = R19
                                  .def SEL_KEY = R20
                                  .def COUNTER_POS = R21
-                                 .def POS = R22
+                                 .def RANDOM_POS = R22
                                  .def POS_Y = R23
                                  .def POS_X = R24
                                  .def V = R25 ; 4bits + Vx_Vy
@@ -1056,8 +1059,8 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakePointer\main.asm(9): Inc
                                  .def LENGTH = R31
                                  
                                  ; define constants
-                                 .equ COUNTER_OFFSET = 156
-                                 .equ COUNTER_OFFSET_MOVE_L = 0xE5
+                                 .equ COUNTER_OFFSET = 131
+                                 .equ COUNTER_OFFSET_MOVE_L = 0xE6
                                  .equ COUNTER_OFFSET_MOVE_H = 0xF9
                                  ; define map size
                                  .equ X_MAX = 79
@@ -1070,6 +1073,9 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakePointer\main.asm(9): Inc
                                  ; define fruit SRAM addresses
                                  .equ FRUITXADDR = 0x0200
                                  .equ FRUITYADDR = 0x0201
+                                 ; define past fruit SRAM addresses
+                                 .equ FRUITXADDR2 = 0x0202
+                                 .equ FRUITYADDR2 = 0x0203
                                  ; define each keyboard input
                                  .equ K7 = 0b1000_1000
                                  .equ K8 = 0b1000_0100
@@ -1095,159 +1101,339 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakePointer\main.asm(9): Inc
                                  
                                  ; begin program
                                  .org 0x0000
-000000 c01a                      	rjmp init
+000000 c08f                      	rjmp init
                                  .org 0x001A
-00001a c129                      	rjmp ISR
+00001a c146                      	rjmp ISR
                                  
+                                 .include "Keyboard.inc"
+                                 
+                                  * Keyboard.inc
+                                  *
+                                  *  Created: 5/19/2018 12:43:56 PM
+                                  *   Author: Vador
+                                  */ 
+                                 
+                                  /*
+                                 ##########################
+                                 KEYBOARD READING FUNCTIONS
+                                 ##########################
+                                 */
+                                 
+                                 updateDir:
+                                 	; 2 steps keyboard check
+                                 	;clr SEL_KEY
+                                 	;rcall KBCheck1
+                                 	;rcall KBCheck2
+                                 	;rcall selectKey
+                                 	;rjmp compareKey
+00001b d05e                      	rcall checkKeyboard
+                                 dirUpdated:
+00001c 9508                      	ret
+                                 
+                                 KBCheck1:
+00001d d005                      	rcall configRowKb
+00001e d00e                      	rcall readColKb
+00001f 9508                      	ret
+                                 
+                                 KBCheck2:
+000020 d007                      	rcall configColKb
+000021 d014                      	rcall readRowKb
+000022 9508                      	ret
+                                 	
+                                 
+                                 configRowKb:
+000023 ef10                      	ldi KB_REG, 0b1111_0000 ; 4 row output mode, 4 col input mode
+000024 b91a                      	out DDRD, KB_REG
+000025 e01f                      	ldi KB_REG, 0b0000_1111 ; rows -> low, cols -> enable pull up resistors
+000026 b91b                      	out PORTD, KB_REG
+000027 9508                      	ret
+                                 
+                                 configColKb:
+000028 e01f                      	ldi KB_REG, 0b0000_1111 ; 4 col output mode, 4 row input mode
+000029 b91a                      	out DDRD, KB_REG
+00002a e01f                      	ldi KB_REG, 0b0000_1111 ; all cols high, 
+00002b b91b                      	out PORTD, KB_REG
+00002c 9508                      	ret
+                                 
+                                 readColKb:
+00002d b009                      	in R0, PIND ; read Pin state
+00002e e01f                      	ldi KB_REG, 0b0000_1111 ; max value of PIND
+00002f 1910                      	sub KB_REG, R0 ; KB_STATE = 0 if all cols are high
+000030 f009                      	breq noKeyPressedCol ; compare KB_STATE (last register used) with 0
+000031 c002                      	rjmp keyPressedCol
+                                 
+                                 	noKeyPressedCol:
+000032 e020                      		ldi SEL_COL, 0x00
+000033 9508                      		ret
+                                 	keyPressedCol:
+000034 d00a                      		rcall checkColPressed
+000035 9508                      		ret
+                                 
+                                 readRowKb:
+000036 b009                      	in R0, PIND ; read Pin state
+000037 ef10                      	ldi KB_REG, 0b1111_0000 ; max value of PIND
+000038 1910                      	sub KB_REG, R0 ; KB_STATE = 0 if all cols are high
+000039 f009                      	breq noKeyPressedRow ; compare KB_STATE (last register used) with 0
+00003a c002                      	rjmp keyPressedRow
+                                 
+                                 	noKeyPressedRow:
+00003b e030                      		ldi SEL_ROW, 0x00
+00003c 9508                      		ret
+                                 	keyPressedRow:
+00003d d00a                      		rcall checkRowPressed
+00003e 9508                      		ret
+                                 
+                                 
+                                 checkColPressed:
+00003f 9b48                      	sbis PIND,0
+000040 e021                      	ldi SEL_COL, 0b0000_0001
+000041 9b49                      	sbis PIND,1
+000042 e022                      	ldi SEL_COL, 0b0000_0010
+000043 9b4a                      	sbis PIND,2
+000044 e024                      	ldi SEL_COL, 0b0000_0100
+000045 9b4b                      	sbis PIND,3
+000046 e028                      	ldi SEL_COL, 0b0000_1000
+000047 9508                      	ret
+                                 
+                                 checkRowPressed:
+000048 994c                      	sbic PIND,4
+000049 e130                      	ldi SEL_ROW, 0b0001_0000
+00004a 994d                      	sbic PIND,5
+00004b e230                      	ldi SEL_ROW, 0b0010_0000
+00004c 994e                      	sbic PIND,6
+00004d e430                      	ldi SEL_ROW, 0b0100_0000
+00004e 994f                      	sbic PIND,7
+00004f e830                      	ldi SEL_ROW, 0b1000_0000
+000050 9508                      	ret
+                                 
+                                 selectKey:
+000051 0f42                      	add SEL_KEY, SEL_COL
+000052 0f43                      	add SEL_KEY, SEL_ROW
+000053 9508                      	ret
+                                 
+                                 compareKey:
+000054 3040                      	cpi SEL_KEY, NO_K
+000055 f051                      		breq NoKpressed
+000056 3144                      	cpi SEL_KEY, K0
+000057 f051                      		breq K0pressed
+000058 3242                      	cpi SEL_KEY, K3
+000059 f059                      		breq K3pressed
+00005a 3142                      	cpi SEL_KEY, KB
+00005b f061                      		breq KBpressed
+00005c 3141                      	cpi SEL_KEY, KC
+00005d f069                      		breq KCpressed
+00005e 3148                      	cpi SEL_KEY, KA
+00005f f071                      		breq KApressed
+                                 
+                                 NoKpressed:
+000060 9a43                      	sbi PORTC,3
+000061 cfba                      	rjmp dirUpdated
+                                 K0pressed:
+000062 e098                      	ldi V, 0b0000_1000 ; set direction to left
+000063 9843                      	cbi PORTC,3
+000064 cfb7                      	rjmp dirUpdated
+                                 K3pressed:
+000065 e094                      	ldi V, 0b0000_0100 ; set direction to up
+000066 9843                      	cbi PORTC,3
+000067 cfb4                      	rjmp dirUpdated
+                                 KBpressed:
+000068 e092                      	ldi V, 0b0000_0010 ; set direction to down
+000069 9843                      	cbi PORTC,3
+00006a cfb1                      	rjmp dirUpdated
+                                 KCpressed:
+00006b e091                      	ldi V, 0b0000_0001 ; set direction to right
+00006c 9843                      	cbi PORTC,3
+00006d cfae                      	rjmp dirUpdated
+                                 KApressed:
+                                 	; begin button
+00006e 9160 0084                 	lds RANDOM_POS, TCNT1L
+000070 d140                      	rcall randomXpos
+000071 9360 0200                 	sts FRUITXADDR, RANDOM_POS
+000073 9160 0085                 	lds RANDOM_POS, TCNT1H
+000075 d140                      	rcall randomYpos
+000076 9360 0201                 	sts FRUITYADDR, RANDOM_POS
+000078 e091                      	ldi V, 0b0000_0001 ; start moving
+000079 cfa2                      	rjmp dirUpdated
+                                 
+                                 
+                                 checkKeyboard:
+                                 	; check Row 3 
+00007a 9a5e                      	SBI PORTD,6
+00007b 985d                      	CBI PORTD,5
+00007c 9a5f                      	SBI PORTD,7
+00007d 9a5c                      	SBI PORTD,4
+00007e 0000                      	NOP
+                                 
+00007f 9b49                      	SBIS PIND,1
+000080 cfe4                      	RJMP K3pressed
+                                 
+                                 	; check Row 4
+000081 985c                      	CBI PORTD,4
+000082 9a5d                      	SBI PORTD,5
+000083 9a5e                      	SBI PORTD,6
+000084 9a5f                      	SBI PORTD,7
+000085 0000                      	NOP
+                                 
+000086 9b48                      	SBIS PIND,0
+000087 cfe3                      	RJMP KCpressed
+000088 9b49                      	SBIS PIND,1
+000089 cfde                      	RJMP KBpressed
+00008a 9b4a                      	SBIS PIND,2
+00008b cfd6                      	RJMP K0pressed
+00008c 9b4b                      	SBIS PIND,3
+00008d cfe0                      	RJMP KApressed
+00008e cfd1                      	RJMP NoKpressed
+                                 
+00008f 9508                      
                                  init:
                                  	; config pins
-00001b 9a23                      	sbi DDRB,3
-00001c 982b                      	cbi PORTB,3
-00001d 9a24                      	sbi DDRB,4
-00001e 982c                      	cbi PORTB,4
-00001f 9a25                      	sbi DDRB,5
-000020 982d                      	cbi PORTB,5
+000090 9a23                      	sbi DDRB,3
+000091 982b                      	cbi PORTB,3
+000092 9a24                      	sbi DDRB,4
+000093 982c                      	cbi PORTB,4
+000094 9a25                      	sbi DDRB,5
+000095 982d                      	cbi PORTB,5
                                  
                                  	; led for debugging	
-000021 9a21                      	sbi DDRB,1 ; buzzer configured as output
-000022 9a3a                      	sbi DDRC,2
-000023 9a3b                      	sbi DDRC,3
-000024 9a42                      	sbi PORTC,2
-000025 9a43                      	sbi PORTC,3
+000096 9a21                      	sbi DDRB,1 ; buzzer configured as output
+000097 9a3a                      	sbi DDRC,2
+000098 9a3b                      	sbi DDRC,3
+000099 9a42                      	sbi PORTC,2
+00009a 9a43                      	sbi PORTC,3
                                  
-000026 e0f5                      	ldi LENGTH, 5
+00009b e0f5                      	ldi LENGTH, 5
                                  
                                  	; head position initial
-000027 e384                      	ldi POS_X, 52
-000028 e072                      	ldi POS_Y, 2
-000029 9380 0100                 	sts HEADXADDR, POS_X
-00002b 9370 0101                 	sts HEADYADDR, POS_Y
+00009c e384                      	ldi POS_X, 52
+00009d e072                      	ldi POS_Y, 2
+00009e 9380 0100                 	sts HEADXADDR, POS_X
+0000a0 9370 0101                 	sts HEADYADDR, POS_Y
                                  
                                  	; fruit position initial
-00002d e18e                      	ldi POS_X, 30
-00002e e072                      	ldi POS_Y, 2
-00002f 9380 0200                 	sts FRUITXADDR, POS_X
-000031 9370 0201                 	sts FRUITYADDR, POS_Y
+0000a2 e18e                      	ldi POS_X, 30
+0000a3 e072                      	ldi POS_Y, 2
+0000a4 9380 0202                 	sts FRUITXADDR2, POS_X
+0000a6 9370 0203                 	sts FRUITYADDR2, POS_Y
                                  
-000033 e091                      	ldi V, 0b0000_0001 ; left Vx, Vy - righth
+0000a8 e090                      	ldi V, 0b0000_0000 ; left Vx, Vy - righth
                                  
                                  	; config display timer 
-000034 e90c                      	ldi R16,COUNTER_OFFSET 
-000035 bd06                      	out TCNT0,R16 ; set counter init
-000036 e003                      	ldi R16,0b0000_0011 ; set prescaler to 64 (COUNTER_OFFSET = 156 -> f = 2.5kHz)
-000037 bd05                      	out TCCR0B,R16 ; timer is configured with prescaler 
+0000a9 e803                      	ldi R16,COUNTER_OFFSET 
+0000aa bd06                      	out TCNT0,R16 ; set counter init
+0000ab e003                      	ldi R16,0b0000_0011 ; set prescaler to 64 (COUNTER_OFFSET = 131 -> f = 2kHz)
+0000ac bd05                      	out TCCR0B,R16 ; timer is configured with prescaler 
                                  	;(timer begins)
                                  
                                  	; config ISR timer for periodic motion
-000038 9478                      	sei ; set the global interrupt flag
-000039 e001                      	ldi R16,0b0000_0001 ; register for ISR config
-00003a 9300 006f                 	sts TIMSK1, R16 ; enable ISR for timer 1
-00003c ef09                      	ldi R16, COUNTER_OFFSET_MOVE_H
-00003d 9300 0085                 	sts TCNT1H,R16
-00003f ee05                      	ldi R16, COUNTER_OFFSET_MOVE_L
-000040 9300 0084                 	sts TCNT1L,R16 ; set counter init
-000042 e005                      	ldi R16,0b0000_0101 ; set prescaler to 1024
-000043 9300 0081                 	sts TCCR1B,R16 ; timer is configured with prescaler 
+0000ad 9478                      	sei ; set the global interrupt flag
+0000ae e001                      	ldi R16,0b0000_0001 ; register for ISR config
+0000af 9300 006f                 	sts TIMSK1, R16 ; enable ISR for timer 1
+0000b1 ef09                      	ldi R16, COUNTER_OFFSET_MOVE_H
+0000b2 9300 0085                 	sts TCNT1H,R16
+0000b4 ee06                      	ldi R16, COUNTER_OFFSET_MOVE_L
+0000b5 9300 0084                 	sts TCNT1L,R16 ; set counter init
+0000b7 e005                      	ldi R16,0b0000_0101 ; set prescaler to 1024
+0000b8 9300 0081                 	sts TCCR1B,R16 ; timer is configured with prescaler 
                                  	;(timer begins)
                                  
-000045 c000                      	rjmp main
+0000ba c000                      	rjmp main
                                  
                                  main:
                                  	; breq gameState, GAMEOVER
                                  	; print GAME OVER
-000046 d105                      	rcall checkRules
-000047 d0a7                      	rcall updateDir
+0000bb d0ad                      	rcall checkRules
+0000bc df5e                      	rcall updateDir
                                  	;rcall move ;in ISR
-000048 d030                      	rcall display
-000049 cffc                      	rjmp main
+0000bd d030                      	rcall display
+0000be cffc                      	rjmp main
                                  
                                  move:
-00004a e0d1                      	ldi YH, HIGH(HEADXADDR)
-00004b e0c0                      	ldi YL, LOW(HEADXADDR)
-00004c 93ff                      	push LENGTH
-00004d 0fff                      	add LENGTH, LENGTH
-00004e 50f2                      	subi LENGTH, 2
-00004f 0fcf                      	add YL, LENGTH
-000050 91ff                      	pop LENGTH
-000051 2fef                      	mov COUNTER_MOVE, LENGTH
+0000bf e0d1                      	ldi YH, HIGH(HEADXADDR)
+0000c0 e0c0                      	ldi YL, LOW(HEADXADDR)
+0000c1 93ff                      	push LENGTH
+0000c2 0fff                      	add LENGTH, LENGTH
+0000c3 50f2                      	subi LENGTH, 2
+0000c4 0fcf                      	add YL, LENGTH
+0000c5 91ff                      	pop LENGTH
+0000c6 2fef                      	mov COUNTER_MOVE, LENGTH
                                  	for_move:
-000052 30e1                      		cpi COUNTER_MOVE, 1
-000053 f031                      		breq do_move
-000054 917a                      		ld POS_Y, -Y
-000055 937f                      		push POS_Y
-000056 918a                      		ld POS_X, -Y
-000057 938f                      		push POS_X
-000058 95ea                      		dec COUNTER_MOVE
-000059 cff8                      		rjmp for_move
+0000c7 30e1                      		cpi COUNTER_MOVE, 1
+0000c8 f031                      		breq do_move
+0000c9 917a                      		ld POS_Y, -Y
+0000ca 937f                      		push POS_Y
+0000cb 918a                      		ld POS_X, -Y
+0000cc 938f                      		push POS_X
+0000cd 95ea                      		dec COUNTER_MOVE
+0000ce cff8                      		rjmp for_move
                                  
                                  	do_move:
-00005a 3091                      		cpi V, 0b0000_0001
-00005b f039                      			breq move_right
-00005c 3098                      		cpi V, 0b0000_1000
-00005d f039                      			breq move_left
-00005e 3092                      		cpi V, 0b0000_0010
-00005f f049                      			breq move_down
-000060 3094                      		cpi V, 0b0000_0100
-000061 f029                      			breq move_up
+0000cf 3091                      		cpi V, 0b0000_0001
+0000d0 f039                      			breq move_right
+0000d1 3098                      		cpi V, 0b0000_1000
+0000d2 f039                      			breq move_left
+0000d3 3092                      		cpi V, 0b0000_0010
+0000d4 f049                      			breq move_down
+0000d5 3094                      		cpi V, 0b0000_0100
+0000d6 f029                      			breq move_up
                                  
-000062 c008                      		rjmp end_move
+0000d7 c008                      		rjmp end_move
                                  
                                  		move_right:
-000063 d055                      			rcall go_right
-000064 c006                      			rjmp end_move
+0000d8 d055                      			rcall go_right
+0000d9 c006                      			rjmp end_move
                                  		move_left:
-000065 d047                      			rcall go_left
-000066 c004                      			rjmp end_move
+0000da d047                      			rcall go_left
+0000db c004                      			rjmp end_move
                                  		move_up:
-000067 d027                      			rcall go_up
-000068 c002                      			rjmp end_move
+0000dc d027                      			rcall go_up
+0000dd c002                      			rjmp end_move
                                  		move_down:
-000069 d034                      			rcall go_down
-00006a c000                      			rjmp end_move
+0000de d034                      			rcall go_down
+0000df c000                      			rjmp end_move
                                  		end_move:
-00006b e0d1                      			ldi YH, HIGH(HEADXADDR)
-00006c e0c0                      			ldi YL, LOW(HEADXADDR)
-00006d 2fef                      			mov COUNTER_MOVE, LENGTH
+0000e0 e0d1                      			ldi YH, HIGH(HEADXADDR)
+0000e1 e0c0                      			ldi YL, LOW(HEADXADDR)
+0000e2 2fef                      			mov COUNTER_MOVE, LENGTH
                                  			for_end_move:
-00006e 30e1                      				cpi COUNTER_MOVE, 1
-00006f f031                      				breq do_end_move
-000070 9389                      				st Y+, POS_X
-000071 9379                      				st Y+, POS_Y
-000072 918f                      				pop POS_X
-000073 917f                      				pop POS_Y
-000074 95ea                      				dec COUNTER_MOVE
-000075 cff8                      				rjmp for_end_move
+0000e3 30e1                      				cpi COUNTER_MOVE, 1
+0000e4 f031                      				breq do_end_move
+0000e5 9389                      				st Y+, POS_X
+0000e6 9379                      				st Y+, POS_Y
+0000e7 918f                      				pop POS_X
+0000e8 917f                      				pop POS_Y
+0000e9 95ea                      				dec COUNTER_MOVE
+0000ea cff8                      				rjmp for_end_move
                                  		do_end_move:
-000076 9389                      			st Y+, POS_X
-000077 8378                      			st Y, POS_Y
-000078 9508                      			ret
+0000eb 9389                      			st Y+, POS_X
+0000ec 8378                      			st Y, POS_Y
+0000ed 9508                      			ret
                                  	
                                  
                                  display:
-000079 e0b1                      	ldi XH, HIGH(HEADXADDR)
-00007a e0a0                      	ldi XL, LOW(HEADXADDR)
+0000ee e0b1                      	ldi XH, HIGH(HEADXADDR)
+0000ef e0a0                      	ldi XL, LOW(HEADXADDR)
                                  	; plot the snake
-00007b 2f5f                      	mov COUNTER_POS, LENGTH
+0000f0 2f5f                      	mov COUNTER_POS, LENGTH
                                  	for_display:
-00007c 3050                      		cpi COUNTER_POS, 0
-00007d f049                      		breq display_end
-00007e 935f                      		push COUNTER_POS ; also used in plot_posX,Y
-00007f 916d                      		ld POS, X+
-000080 d044                      		rcall plot_posX
-000081 916d                      		ld POS, X+
-000082 d04d                      		rcall plot_posY
-000083 d060                      		rcall enableLatch
-000084 915f                      		pop COUNTER_POS ; recover from RAM
-000085 955a                      		dec COUNTER_POS
-000086 cff5                      		rjmp for_display
+0000f1 3050                      		cpi COUNTER_POS, 0
+0000f2 f049                      		breq display_end
+0000f3 935f                      		push COUNTER_POS ; also used in plot_posX,Y
+0000f4 918d                      		ld POS_X, X+
+0000f5 d044                      		rcall plot_posX
+0000f6 917d                      		ld POS_Y, X+
+0000f7 d04d                      		rcall plot_posY
+0000f8 d060                      		rcall enableLatch
+0000f9 915f                      		pop COUNTER_POS ; recover from RAM
+0000fa 955a                      		dec COUNTER_POS
+0000fb cff5                      		rjmp for_display
                                  	display_end:
-                                 		; plot the fruit
-000087 9160 0200                 		lds POS, FRUITXADDR
-000089 d03b                      		rcall plot_posX
-00008a 9160 0201                 		lds POS, FRUITYADDR
-00008c d043                      		rcall plot_posY
-00008d d056                      		rcall enableLatch
-00008e 9508                      		ret
+                                 		; plot the fruit and return
+0000fc 9180 0200                 		lds POS_X, FRUITXADDR
+0000fe d03b                      		rcall plot_posX
+0000ff 9170 0201                 		lds POS_Y, FRUITYADDR
+000101 d043                      		rcall plot_posY
+000102 d056                      		rcall enableLatch
+000103 9508                      		ret
                                  
                                  /*
                                  #################
@@ -1256,98 +1442,98 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakePointer\main.asm(9): Inc
                                  */
                                  
                                  go_up:
-00008f 3070                      	cpi POS_Y, 0
-000090 f009                      	breq boundary_up
-000091 c009                      	rjmp do_go_up
+000104 3070                      	cpi POS_Y, 0
+000105 f009                      	breq boundary_up
+000106 c009                      	rjmp do_go_up
                                  	boundary_up:
-000092 3288                      		cpi POS_X, 40
-000093 f00a                      		brmi up_from_top
-000094 c003                      		rjmp up_from_bottom
+000107 3288                      		cpi POS_X, 40
+000108 f00a                      		brmi up_from_top
+000109 c003                      		rjmp up_from_bottom
                                  
                                  	up_from_top:
-000095 e076                      		ldi POS_Y, 6
-000096 5d88                      		subi POS_X, 216 ; -216 = +40
-000097 c005                      		rjmp go_up_end
+00010a e076                      		ldi POS_Y, 6
+00010b 5d88                      		subi POS_X, 216 ; -216 = +40
+00010c c005                      		rjmp go_up_end
                                  
                                  	up_from_bottom:
-000098 e076                      	 	ldi POS_Y, 6
-000099 5288                      		subi POS_X, 40 ; sub offset to change down to top screen
-00009a c002                      		rjmp go_up_end
+00010d e076                      	 	ldi POS_Y, 6
+00010e 5288                      		subi POS_X, 40 ; sub offset to change down to top screen
+00010f c002                      		rjmp go_up_end
                                  
                                  	do_go_up:
-00009b 957a                      		dec POS_Y
-00009c c000                      		rjmp go_up_end
+000110 957a                      		dec POS_Y
+000111 c000                      		rjmp go_up_end
                                  	go_up_end:
-00009d 9508                      		ret
+000112 9508                      		ret
                                  
                                  go_down:
-00009e 3076                      	cpi POS_Y, 6
-00009f f009                      	breq boundary_down
-0000a0 c009                      	rjmp do_go_down
+000113 3076                      	cpi POS_Y, 6
+000114 f009                      	breq boundary_down
+000115 c009                      	rjmp do_go_down
                                  
                                  	boundary_down:
-0000a1 3288                      		cpi POS_X, 40
-0000a2 f00a                      		brmi down_from_top
-0000a3 c003                      		rjmp down_from_bottom
+000116 3288                      		cpi POS_X, 40
+000117 f00a                      		brmi down_from_top
+000118 c003                      		rjmp down_from_bottom
                                  
                                  	down_from_top:
-0000a4 e070                      		ldi POS_Y, 0
-0000a5 5d88                      		subi POS_X, 216 ; -216=+40 add offset to change top to down screen
-0000a6 c005                      		rjmp go_down_end
+000119 e070                      		ldi POS_Y, 0
+00011a 5d88                      		subi POS_X, 216 ; -216=+40 add offset to change top to down screen
+00011b c005                      		rjmp go_down_end
                                  
                                  	down_from_bottom:
-0000a7 e070                      	 	ldi POS_Y, 0
-0000a8 5288                      		subi POS_X, 40 ; sub offset to change down to top screen
-0000a9 c002                      		rjmp go_down_end
+00011c e070                      	 	ldi POS_Y, 0
+00011d 5288                      		subi POS_X, 40 ; sub offset to change down to top screen
+00011e c002                      		rjmp go_down_end
                                  
                                  	do_go_down:
-0000aa 9573                      		inc POS_Y
-0000ab c000                      		rjmp go_down_end
+00011f 9573                      		inc POS_Y
+000120 c000                      		rjmp go_down_end
                                  	go_down_end:
-0000ac 9508                      		ret
+000121 9508                      		ret
                                  
                                  go_left:
-0000ad 3080                      	cpi POS_X, 0
-0000ae f019                      	breq boudary_up_left
-0000af 3288                      	cpi POS_X, 40
-0000b0 f019                      	breq boudary_down_left
-0000b1 c004                      	rjmp do_go_left
+000122 3080                      	cpi POS_X, 0
+000123 f019                      	breq boudary_up_left
+000124 3288                      	cpi POS_X, 40
+000125 f019                      	breq boudary_down_left
+000126 c004                      	rjmp do_go_left
                                  
                                  	boudary_up_left:
-0000b2 e287                      		ldi POS_X, 39
-0000b3 c004                      		rjmp go_left_end
+000127 e287                      		ldi POS_X, 39
+000128 c004                      		rjmp go_left_end
                                  
                                  	boudary_down_left:
-0000b4 e48f                      		ldi POS_X, X_MAX
-0000b5 c002                      		rjmp go_left_end	
+000129 e48f                      		ldi POS_X, X_MAX
+00012a c002                      		rjmp go_left_end	
                                  
                                  	do_go_left:
-0000b6 958a                      		dec POS_X
-0000b7 c000                      		rjmp go_left_end
+00012b 958a                      		dec POS_X
+00012c c000                      		rjmp go_left_end
                                  	go_left_end:
-0000b8 9508                      		ret
+00012d 9508                      		ret
                                  
                                  go_right:
-0000b9 3287                      	cpi POS_X, 39
-0000ba f019                      	breq boudary_up_right
-0000bb 348f                      	cpi POS_X, X_MAX
-0000bc f019                      	breq boudary_down_right
-0000bd c004                      	rjmp do_go_right
+00012e 3287                      	cpi POS_X, 39
+00012f f019                      	breq boudary_up_right
+000130 348f                      	cpi POS_X, X_MAX
+000131 f019                      	breq boudary_down_right
+000132 c004                      	rjmp do_go_right
                                  
                                  	boudary_up_right:
-0000be e080                      		ldi POS_X, 0
-0000bf cff8                      		rjmp go_left_end
+000133 e080                      		ldi POS_X, 0
+000134 cff8                      		rjmp go_left_end
                                  
                                  	boudary_down_right:
-0000c0 e288                      		ldi POS_X, 40
-0000c1 cff6                      		rjmp go_left_end	
+000135 e288                      		ldi POS_X, 40
+000136 cff6                      		rjmp go_left_end	
                                  
                                  	do_go_right:
-0000c2 9583                      		inc POS_X
-0000c3 c000                      		rjmp go_right_end
+000137 9583                      		inc POS_X
+000138 c000                      		rjmp go_right_end
                                  
                                  	go_right_end:
-0000c4 9508                      		ret
+000139 9508                      		ret
                                  
                                  /*
                                  ############################
@@ -1356,46 +1542,46 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakePointer\main.asm(9): Inc
                                  */
                                  
                                  plot_posX:
-0000c5 e45f                      	ldi COUNTER_POS, X_MAX
+00013a e45f                      	ldi COUNTER_POS, X_MAX
                                  	; to make 80 - POS, do the 3 following lines
                                  /*	subi POS, 80 ; X_MAX + 1
                                  	ldi R17, 0b1111_1111 ; xor with 1111_1111 reverse the bits
                                  	eor POS, R17 ; it is done to take into account the fact that the first bit written are the last in the screen*/
                                  	comparePosX:
-0000c6 1765                      		cp POS, COUNTER_POS
-0000c7 f029                      		breq foundPosX
-0000c8 d013                      		rcall write_0
+00013b 1785                      		cp POS_X, COUNTER_POS
+00013c f029                      		breq foundPosX
+00013d d013                      		rcall write_0
                                  	checkEndPlotX:
-0000c9 3050                      		cpi COUNTER_POS, 0
-0000ca f021                      		breq endPlotX
-0000cb 955a                      		dec COUNTER_POS
-0000cc cff9                      		rjmp comparePosX
+00013e 3050                      		cpi COUNTER_POS, 0
+00013f f021                      		breq endPlotX
+000140 955a                      		dec COUNTER_POS
+000141 cff9                      		rjmp comparePosX
                                  	foundPosX:
-0000cd d012                      		rcall write_1
-0000ce cffa                      		rjmp checkEndPlotX
+000142 d012                      		rcall write_1
+000143 cffa                      		rjmp checkEndPlotX
                                  	endPlotX:
-0000cf 9508                      		ret
+000144 9508                      		ret
                                  
                                  plot_posY:
-0000d0 e056                      	ldi COUNTER_POS, Y_MAX
+000145 e056                      	ldi COUNTER_POS, Y_MAX
                                  /*	subi POS, 7 ; Y_MAX + 1
                                  	ldi R17, 0b1111_1111 ; xor with 1111_1111 reverse the bits
                                  	eor POS, R17 ; it is done to take into account the fact that the first bit written are the last in the screen*/
-0000d1 d00a                      	rcall write_0 ; to complete the register of rows
+000146 d00a                      	rcall write_0 ; to complete the register of rows
                                  	comparePosY:
-0000d2 1765                      		cp POS, COUNTER_POS
-0000d3 f029                      		breq foundPosY
-0000d4 d007                      		rcall write_0
+000147 1775                      		cp POS_Y, COUNTER_POS
+000148 f029                      		breq foundPosY
+000149 d007                      		rcall write_0
                                  	checkEndPlotY:
-0000d5 3050                      		cpi COUNTER_POS, 0
-0000d6 f021                      		breq endPlotY
-0000d7 955a                      		dec COUNTER_POS
-0000d8 cff9                      		rjmp comparePosY
+00014a 3050                      		cpi COUNTER_POS, 0
+00014b f021                      		breq endPlotY
+00014c 955a                      		dec COUNTER_POS
+00014d cff9                      		rjmp comparePosY
                                  	foundPosY:
-0000d9 d006                      		rcall write_1
-0000da cffa                      		rjmp checkEndPlotY
+00014e d006                      		rcall write_1
+00014f cffa                      		rjmp checkEndPlotY
                                  	endPlotY:
-0000db 9508                      		ret
+000150 9508                      		ret
                                  
                                  
                                  write_0:
@@ -1403,176 +1589,55 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakePointer\main.asm(9): Inc
                                  	; to do that: 
                                  	; 1- generate your bit with PB3
                                  	; 2- generate a clock rising/falling edge with PB5
-0000dc 982b                      	cbi PORTB,3
-0000dd 9a2d                      	sbi PORTB,5
-0000de 982d                      	cbi PORTB,5
-0000df 9508                      	ret
+000151 982b                      	cbi PORTB,3
+000152 9a2d                      	sbi PORTB,5
+000153 982d                      	cbi PORTB,5
+000154 9508                      	ret
                                  
                                  write_1:
                                  	; will write a 1 on the shift register (8 bit register)
                                  	; to do that: 
                                  	; 1- generate your bit with PB3
                                  	; 2- generate a clock rising/falling edge with PB5
-0000e0 9a2b                      	sbi PORTB,3
-0000e1 9a2d                      	sbi PORTB,5
-0000e2 982d                      	cbi PORTB,5
-0000e3 9508                      	ret
+000155 9a2b                      	sbi PORTB,3
+000156 9a2d                      	sbi PORTB,5
+000157 982d                      	cbi PORTB,5
+000158 9508                      	ret
                                  
                                  enableLatch:
                                  	; will enable the output of the shift register
                                  	; by setting then clearing PB4
-0000e4 9a2c                      	sbi PORTB,4
-0000e5 d002                      	rcall wait
-0000e6 982c                      	cbi PORTB,4
-0000e7 9508                      	ret
+000159 9a2c                      	sbi PORTB,4
+00015a d002                      	rcall wait
+00015b 982c                      	cbi PORTB,4
+00015c 9508                      	ret
                                  
                                  wait:
-0000e8 b305                      	in R16,TIFR0 ; read interrupt flag
-0000e9 fb00                      	bst R16,0 ; copy bit 0 (TOV) in T flag
-0000ea f7ee                      	brtc wait
-0000eb bb05                      	out TIFR0, R16
-0000ec e90c                      	ldi R16,COUNTER_OFFSET 
-0000ed bd06                      	out TCNT0,R16 ; set counter init
-0000ee 9508                      	ret ; exit subroutine and go back to rcall
+00015d 9aa8                      	sbi TIFR0, TOV0 ; set interrupt bit to 1
+                                 	loop_wait:
+00015e 9ba8                      		sbis TIFR0, TOV0
+00015f cffe                      		rjmp loop_wait
+000160 9508                      	ret
+                                 
+                                 /*wait:
+                                 	in R16,TIFR0 ; read interrupt flag
+                                 	bst R16,0 ; copy bit 0 (TOV) in T flag
+                                 	brtc wait
+                                 	out TIFR0, R16
+                                 	ldi R16,COUNTER_OFFSET 
+                                 	out TCNT0,R16 ; set counter init
+                                 	ret */
                                  
                                  
-                                 /*
-                                 ##########################
-                                 KEYBOARD READING FUNCTIONS
-                                 ##########################
-                                 */
-                                 
-                                 updateDir:
-                                 	; 2 steps keyboard check
-0000ef 2744                      	clr SEL_KEY
-0000f0 d004                      	rcall KBCheck1
-0000f1 d006                      	rcall KBCheck2
-0000f2 d036                      	rcall selectKey
-0000f3 c038                      	rjmp compareKey
-                                 dirUpdated:
-0000f4 9508                      	ret
-                                 
-                                 KBCheck1:
-0000f5 d005                      	rcall configRowKb
-0000f6 d00e                      	rcall readColKb
-0000f7 9508                      	ret
-                                 
-                                 KBCheck2:
-0000f8 d007                      	rcall configColKb
-0000f9 d014                      	rcall readRowKb
-0000fa 9508                      	ret
-                                 	
-                                 
-                                 configRowKb:
-0000fb ef10                      	ldi KB_REG, 0b1111_0000 ; 4 row output mode, 4 col input mode
-0000fc b91a                      	out DDRD, KB_REG
-0000fd e01f                      	ldi KB_REG, 0b0000_1111 ; rows -> low, cols -> enable pull up resistors
-0000fe b91b                      	out PORTD, KB_REG
-0000ff 9508                      	ret
-                                 
-                                 configColKb:
-000100 e01f                      	ldi KB_REG, 0b0000_1111 ; 4 col output mode, 4 row input mode
-000101 b91a                      	out DDRD, KB_REG
-000102 e01f                      	ldi KB_REG, 0b0000_1111 ; all cols high, 
-000103 b91b                      	out PORTD, KB_REG
-000104 9508                      	ret
-                                 
-                                 readColKb:
-000105 b009                      	in R0, PIND ; read Pin state
-000106 e01f                      	ldi KB_REG, 0b0000_1111 ; max value of PIND
-000107 1910                      	sub KB_REG, R0 ; KB_STATE = 0 if all cols are high
-000108 f009                      	breq noKeyPressedCol ; compare KB_STATE (last register used) with 0
-000109 c002                      	rjmp keyPressedCol
-                                 
-                                 	noKeyPressedCol:
-00010a e020                      		ldi SEL_COL, 0x00
-00010b 9508                      		ret
-                                 	keyPressedCol:
-00010c d00a                      		rcall checkColPressed
-00010d 9508                      		ret
-                                 
-                                 readRowKb:
-00010e b009                      	in R0, PIND ; read Pin state
-00010f ef10                      	ldi KB_REG, 0b1111_0000 ; max value of PIND
-000110 1910                      	sub KB_REG, R0 ; KB_STATE = 0 if all cols are high
-000111 f009                      	breq noKeyPressedRow ; compare KB_STATE (last register used) with 0
-000112 c002                      	rjmp keyPressedRow
-                                 
-                                 	noKeyPressedRow:
-000113 e030                      		ldi SEL_ROW, 0x00
-000114 9508                      		ret
-                                 	keyPressedRow:
-000115 d00a                      		rcall checkRowPressed
-000116 9508                      		ret
-                                 
-                                 
-                                 checkColPressed:
-000117 9b48                      	sbis PIND,0
-000118 e021                      	ldi SEL_COL, 0b0000_0001
-000119 9b49                      	sbis PIND,1
-00011a e022                      	ldi SEL_COL, 0b0000_0010
-00011b 9b4a                      	sbis PIND,2
-00011c e024                      	ldi SEL_COL, 0b0000_0100
-00011d 9b4b                      	sbis PIND,3
-00011e e028                      	ldi SEL_COL, 0b0000_1000
-00011f 9508                      	ret
-                                 
-                                 checkRowPressed:
-000120 994c                      	sbic PIND,4
-000121 e130                      	ldi SEL_ROW, 0b0001_0000
-000122 994d                      	sbic PIND,5
-000123 e230                      	ldi SEL_ROW, 0b0010_0000
-000124 994e                      	sbic PIND,6
-000125 e430                      	ldi SEL_ROW, 0b0100_0000
-000126 994f                      	sbic PIND,7
-000127 e830                      	ldi SEL_ROW, 0b1000_0000
-000128 9508                      	ret
-                                 
-                                 selectKey:
-000129 0f42                      	add SEL_KEY, SEL_COL
-00012a 0f43                      	add SEL_KEY, SEL_ROW
-00012b 9508                      	ret
-                                 
-                                 compareKey:
-00012c 3040                      		cpi SEL_KEY, NO_K
-00012d f041                      	breq NoKpressed
-00012e 3144                      		cpi SEL_KEY, K0
-00012f f041                      	breq K0pressed
-000130 3242                      		cpi SEL_KEY, K3
-000131 f049                      	breq K3pressed
-000132 3142                      		cpi SEL_KEY, KB
-000133 f051                      	breq KBpressed
-000134 3141                      		cpi SEL_KEY, KC
-000135 f059                      	breq KCpressed
-                                 
-                                 NoKpressed:
-000136 cfbd                      	rjmp dirUpdated
-000137 9a43                      	sbi PORTC,3
-                                 K0pressed:
-000138 e098                      	ldi V, 0b0000_1000 ; set direction to left
-000139 9843                      	cbi PORTC,3
-00013a cfb9                      	rjmp dirUpdated
-                                 K3pressed:
-00013b e094                      	ldi V, 0b0000_0100 ; set direction to up
-00013c 9843                      	cbi PORTC,3
-00013d cfb6                      	rjmp dirUpdated
-                                 KBpressed:
-00013e e092                      	ldi V, 0b0000_0010 ; set direction to down
-00013f 9843                      	cbi PORTC,3
-000140 cfb3                      	rjmp dirUpdated
-                                 KCpressed:
-000141 e091                      	ldi V, 0b0000_0001 ; set direction to right
-000142 9843                      	cbi PORTC,3
-000143 cfb0                      	rjmp dirUpdated
                                  
                                  ISR:
                                  	;cbi PORTC,2 ; switch led 2
-000144 df05                      	rcall move
-000145 ef09                      	ldi R16, COUNTER_OFFSET_MOVE_H
-000146 9300 0085                 	sts TCNT1H,R16
-000148 ee05                      	ldi R16, COUNTER_OFFSET_MOVE_L
-000149 9300 0084                 	sts TCNT1L,R16
-00014b 9518                      	reti
+000161 df5d                      	rcall move
+000162 ef09                      	ldi R16, COUNTER_OFFSET_MOVE_H
+000163 9300 0085                 	sts TCNT1H,R16
+000165 ee06                      	ldi R16, COUNTER_OFFSET_MOVE_L
+000166 9300 0084                 	sts TCNT1L,R16
+000168 9518                      	reti
                                  
                                  /*
                                  ############################
@@ -1581,78 +1646,112 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakePointer\main.asm(9): Inc
                                  */
                                  
                                  checkRules:
-00014c d002                      	rcall deathRules
-00014d d019                      	rcall eatRules
-00014e 9508                      	ret
+000169 d002                      	rcall deathRules
+00016a d019                      	rcall eatRules
+00016b 9508                      	ret
                                  
                                  deathRules:
                                  	; here POS_X and POS_Y are just registers with different meaning
-00014f e0d1                      	ldi YH, HIGH(HEADYADDR)
-000150 e0c1                      	ldi YL, LOW(HEADYADDR)
-000151 95c3                      	inc YL ; to jump on body address
-000152 2fef                      	mov COUNTER_MOVE, LENGTH
+00016c e0d1                      	ldi YH, HIGH(HEADYADDR)
+00016d e0c1                      	ldi YL, LOW(HEADYADDR)
+00016e 95c3                      	inc YL ; to jump on body address
+00016f 2fef                      	mov COUNTER_MOVE, LENGTH
                                  	for_death:
-000153 9180 0100                 		lds POS_X, HEADXADDR
-000155 30e1                      		cpi COUNTER_MOVE, 1
-000156 f079                      		breq death_ended
-000157 9179                      		ld POS_Y, Y+ ; POS_Y contains the X pos of next point
-000158 1787                      		cp POS_X, POS_Y
-000159 f019                      		breq collision_x
-00015a 95c3                      		inc YL ; to check next X
-00015b 95ea                      		dec COUNTER_MOVE
-00015c cff6                      		rjmp for_death
+000170 9180 0100                 		lds POS_X, HEADXADDR
+000172 30e1                      		cpi COUNTER_MOVE, 1
+000173 f079                      		breq death_ended
+000174 9179                      		ld POS_Y, Y+ ; POS_Y contains the X pos of next point
+000175 1787                      		cp POS_X, POS_Y
+000176 f019                      		breq collision_x
+000177 95c3                      		inc YL ; to check next X
+000178 95ea                      		dec COUNTER_MOVE
+000179 cff6                      		rjmp for_death
                                  
                                  		collision_x:
                                  			; check for xy collision
-00015d 9180 0101                 			lds POS_X, HEADYADDR
-00015f 9179                      			ld POS_Y, Y+ ; POS_Y contains the Y pos of body point
-000160 1787                      			cp POS_X, POS_Y
-000161 f011                      			breq on_death
-000162 95ea                      			dec COUNTER_MOVE
-000163 cfef                      			rjmp for_death
+00017a 9180 0101                 			lds POS_X, HEADYADDR
+00017c 9179                      			ld POS_Y, Y+ ; POS_Y contains the Y pos of body point
+00017d 1787                      			cp POS_X, POS_Y
+00017e f011                      			breq on_death
+00017f 95ea                      			dec COUNTER_MOVE
+000180 cfef                      			rjmp for_death
                                  
                                  		on_death:
                                  			; print game over
-000164 e090                      			ldi V, 0b0000_0000
-000165 c000                      			rjmp death_ended
+000181 e090                      			ldi V, 0b0000_0000
+000182 c000                      			rjmp death_ended
                                  
                                  	death_ended:
-000166 9508                      	ret
+000183 9508                      	ret
                                  
                                  
                                  eatRules:
                                  	; here POS_X and POS_Y are just registers with different meaning
-000167 9180 0100                 	lds POS_X, HEADXADDR
-000169 9170 0200                 	lds POS_Y, FRUITXADDR
+000184 9180 0100                 	lds POS_X, HEADXADDR
+000186 9170 0200                 	lds POS_Y, FRUITXADDR
                                  	; check if matching in x positions
-00016b 1787                      	cp POS_X, POS_Y
-00016c f009                      	breq match_pos_x
-00016d c012                      	rjmp eat_ended
+000188 1787                      	cp POS_X, POS_Y
+000189 f009                      	breq match_pos_x
+00018a c00a                      	rjmp eat_ended
                                  
                                  	match_pos_x:
                                  		; check if matching in y positions
-00016e 9180 0101                 		lds POS_X, HEADYADDR
-000170 9170 0201                 		lds POS_Y, FRUITYADDR
-000172 1787                      		cp POS_X, POS_Y
-000173 f009                      		breq match_pos_xy
-000174 c00b                      		rjmp eat_ended
+00018b 9180 0101                 		lds POS_X, HEADYADDR
+00018d 9170 0201                 		lds POS_Y, FRUITYADDR
+00018f 1787                      		cp POS_X, POS_Y
+000190 f009                      		breq match_pos_xy
+000191 c003                      		rjmp eat_ended
                                  
                                  	match_pos_xy:
                                  		; if both x and y pos matched
-000175 9180 0200                 		lds POS_X, FRUITXADDR
-000177 9170 0201                 		lds POS_Y, FRUITYADDR
-000179 d007                      		rcall randomPos
-00017a 9380 0200                 		sts FRUITXADDR, POS_X
-00017c 9370 0201                 		sts FRUITYADDR, POS_Y
-00017e 95f3                      		inc LENGTH
-00017f c000                      		rjmp eat_ended
+000192 d003                      		rcall nextRandomPos
+000193 95f3                      		inc LENGTH
+000194 c000                      		rjmp eat_ended
                                  
                                  	eat_ended:
-000180 9508                      		ret
+000195 9508                      		ret
                                  
-                                 randomPos:
-000181 958a                      	dec POS_X
-000182 9508                      	ret
+                                 nextRandomPos:
+                                 	; pseudo random number generator using Fibonacci
+                                 	; random x
+000196 9180 0200                 	lds POS_X, FRUITXADDR
+000198 9170 0202                 	lds POS_Y, FRUITXADDR2
+00019a 938f                      	push POS_X
+00019b 0f87                      	add POS_X, POS_Y
+00019c 2f68                      	mov RANDOM_POS, POS_X
+00019d 918f                      	pop POS_X
+00019e d012                      	rcall randomXpos
+00019f 9360 0200                 	sts FRUITXADDR, RANDOM_POS
+0001a1 9380 0202                 	sts FRUITXADDR2, POS_X
+                                 	
+                                 	; random y
+0001a3 9170 0201                 	lds POS_Y, FRUITYADDR
+0001a5 9180 0203                 	lds POS_X, FRUITYADDR2
+0001a7 937f                      	push POS_Y
+0001a8 0f78                      	add POS_Y, POS_X
+0001a9 2f67                      	mov RANDOM_POS, POS_Y
+0001aa 917f                      	pop POS_Y
+0001ab d00a                      	rcall randomYpos
+0001ac 9360 0201                 	sts FRUITYADDR, RANDOM_POS
+0001ae 9370 0203                 	sts FRUITYADDR2, POS_Y
+0001b0 9508                      	ret
+                                 
+                                 randomXpos:
+                                 	; performs a modulo 80 of the random register
+0001b1 3560                      	cpi RANDOM_POS, 80
+0001b2 f010                      	brlo randXend
+0001b3 5560                      	subi RANDOM_POS, 80
+0001b4 cffc                      	rjmp randomXpos
+                                 	randXend:
+0001b5 9508                      		ret
+                                 
+                                 randomYpos:
+                                 	; performs a modulo 7 of the random register
+0001b6 3067                      	cpi RANDOM_POS, 7
+0001b7 f010                      	brlo randYend
+0001b8 5067                      	subi RANDOM_POS, 7
+0001b9 cffc                      	rjmp randomYpos
+                                 	randYend:
 
 
 RESOURCE USE INFORMATION
@@ -1672,37 +1771,37 @@ counted separately from r26..r31 here.
 "ATmega328P" register use summary:
 x  :   2 y  :   8 z  :   0 r0 :   4 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  21 r17:  12 r18:   6 r19:   6 r20:   8 
-r21:  13 r22:   6 r23:  27 r24:  36 r25:  10 r26:   1 r27:   1 r28:   6 
+r13:   0 r14:   0 r15:   0 r16:  16 r17:  12 r18:   6 r19:   6 r20:   8 
+r21:  13 r22:  12 r23:  36 r24:  44 r25:  11 r26:   1 r27:   1 r28:   6 
 r29:   3 r30:  10 r31:  12 
 Registers used: 19 out of 35 (54.3%)
 
 "ATmega328P" instruction use summary:
-.lds  :   0 .sts  :   0 adc   :   0 add   :   4 adiw  :   0 and   :   0 
+.lds  :   0 .sts  :   0 adc   :   0 add   :   6 adiw  :   0 and   :   0 
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
-brcc  :   0 brcs  :   0 break :   0 breq  :  29 brge  :   0 brhc  :   0 
-brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   2 
-brne  :   0 brpl  :   0 brsh  :   0 brtc  :   1 brts  :   0 brvc  :   0 
-brvs  :   0 bset  :   0 bst   :   1 call  :   0 cbi   :  11 cbr   :   0 
-clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   1 cls   :   0 
+brcc  :   0 brcs  :   0 break :   0 breq  :  30 brge  :   0 brhc  :   0 
+brhs  :   0 brid  :   0 brie  :   0 brlo  :   2 brlt  :   0 brmi  :   2 
+brne  :   0 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
+brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :  13 cbr   :   0 
+clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   6 cpc   :   0 
-cpi   :  23 cpse  :   0 dec   :  10 eor   :   0 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :   3 inc   :   5 jmp   :   0 
-ld    :   6 ldd   :   0 ldi   :  54 lds   :  10 lpm   :   0 lsl   :   0 
-lsr   :   0 mov   :   4 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :   8 pop   :   4 
-push  :   4 rcall :  32 ret   :  28 reti  :   1 rjmp  :  48 rol   :   0 
-ror   :   0 sbc   :   0 sbci  :   0 sbi   :  13 sbic  :   4 sbis  :   4 
+cpi   :  26 cpse  :   0 dec   :   9 eor   :   0 fmul  :   0 fmuls :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   2 inc   :   5 jmp   :   0 
+ld    :   6 ldd   :   0 ldi   :  54 lds   :  14 lpm   :   0 lsl   :   0 
+lsr   :   0 mov   :   6 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
+neg   :   0 nop   :   2 or    :   0 ori   :   0 out   :   6 pop   :   6 
+push  :   6 rcall :  34 ret   :  31 reti  :   1 rjmp  :  57 rol   :   0 
+ror   :   0 sbc   :   0 sbci  :   0 sbi   :  20 sbic  :   4 sbis  :  10 
 sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   1 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
-sez   :   0 sleep :   0 spm   :   0 st    :   4 std   :   0 sts   :  12 
-sub   :   2 subi  :   5 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 31 out of 113 (27.4%)
+sez   :   0 sleep :   0 spm   :   0 st    :   4 std   :   0 sts   :  16 
+sub   :   2 subi  :   7 swap  :   0 tst   :   0 wdr   :   0 
+Instructions used: 30 out of 113 (26.5%)
 
 "ATmega328P" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000306    724      0    724   32768   2.2%
+[.cseg] 0x000000 0x000376    836      0    836   32768   2.6%
 [.dseg] 0x000100 0x000100      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 
