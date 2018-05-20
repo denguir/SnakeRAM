@@ -14,9 +14,9 @@
 		cpi COUNTER_POS, 0
 		breq display_end
 		push COUNTER_POS ; also used in plot_posX,Y
-		ld POS_X, X+
+		ld SYMBOL, X+ ; symbol = posX
 		rcall plot_posX
-		ld POS_Y, X+
+		ld SYMBOL, X+ ; symbol = posY
 		rcall plot_posY
 		rcall enableLatch
 		pop COUNTER_POS ; recover from RAM
@@ -24,9 +24,9 @@
 		rjmp for_display
 	display_end:
 		; plot the fruit and return
-		lds POS_X, FRUITXADDR
+		lds SYMBOL, FRUITXADDR ; symbol = posX
 		rcall plot_posX
-		lds POS_Y, FRUITYADDR
+		lds SYMBOL, FRUITYADDR ; symbol = posY
 		rcall plot_posY
 		rcall enableLatch
 		ret
@@ -38,7 +38,7 @@ plot_posX:
 	ldi R17, 0b1111_1111 ; xor with 1111_1111 reverse the bits
 	eor POS, R17 ; it is done to take into account the fact that the first bit written are the last in the screen*/
 	comparePosX:
-		cp POS_X, COUNTER_POS
+		cp SYMBOL, COUNTER_POS
 		breq foundPosX
 		rcall write_0
 	checkEndPlotX:
@@ -59,7 +59,7 @@ plot_posY:
 	eor POS, R17 ; it is done to take into account the fact that the first bit written are the last in the screen*/
 	rcall write_0 ; to complete the register of rows
 	comparePosY:
-		cp POS_Y, COUNTER_POS
+		cp SYMBOL, COUNTER_POS
 		breq foundPosY
 		rcall write_0
 	checkEndPlotY:
@@ -103,20 +103,13 @@ enableLatch:
 	ret
 
 wait:
+	ldi R16,COUNTER_OFFSET
+	out TCNT0,R16 ; set counter init
 	sbi TIFR0, TOV0 ; set interrupt bit to 1
 	loop_wait:
 		sbis TIFR0, TOV0
 		rjmp loop_wait
 	ret
-
-/*wait:
-	in R16,TIFR0 ; read interrupt flag
-	bst R16,0 ; copy bit 0 (TOV) in T flag
-	brtc wait
-	out TIFR0, R16
-	ldi R16,COUNTER_OFFSET 
-	out TCNT0,R16 ; set counter init
-	ret */
 
  displayScore:
 	ret

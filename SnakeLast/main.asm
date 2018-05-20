@@ -20,7 +20,7 @@
 
 ; define constants:
 ; timer counters
-.equ COUNTER_OFFSET = 131
+.equ COUNTER_OFFSET = 206
 .equ COUNTER_OFFSET_MOVE_L = 0xE6
 .equ COUNTER_OFFSET_MOVE_H = 0xF9
 
@@ -72,7 +72,7 @@ init:
 	; config display timer 
 	ldi R16,COUNTER_OFFSET 
 	out TCNT0,R16 ; set counter init
-	ldi R16,0b0000_0011 ; set prescaler to 64 (COUNTER_OFFSET = 131 -> f = 2kHz)
+	ldi R16,0b0000_0011 ; set prescaler to 64 (COUNTER_OFFSET = 206 -> f = 5kHz)
 	out TCCR0B,R16 ; timer is configured with prescaler 
 	;(timer begins)
 
@@ -88,6 +88,7 @@ init:
 	sts TCCR1B,R16 ; timer is configured with prescaler 
 	;(timer begins)
 
+	rcall KApressed ; automatically push the key A to begin the game 
 	rjmp main
 
 main:
