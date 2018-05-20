@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm Sun May 20 14:44:56 2018
+AVRASM ver. 2.2.7  C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm Sun May 20 17:14:59 2018
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\avrasm\inc\m328pdef.inc'
 C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm(54): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\avrasm\inc\m328pdef.inc'
@@ -1044,9 +1044,9 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm(61): Inclu
                                  
                                  ; begin program
                                  .org 0x0000
-000000 c283                      	rjmp init
+000000 c27d                      	rjmp init
                                  .org 0x001A
-00001a c289                      	rjmp ISRmove
+00001a c283                      	rjmp ISRmove
                                  
                                  ; include definition file of ATmega328P
                                  .include "m328pdef.inc"
@@ -1107,61 +1107,53 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm(61): Inclu
                                  	; 4 steps keyboard check
                                  	; check row 3
 00001b 985d                      	cbi PORTD,5
-00001c 9a5c                      	sbi PORTD,4
-00001d 9a5e                      	sbi PORTD,6
-00001e 9a5f                      	sbi PORTD,7
-00001f 0000                      	nop
-                                 
-000020 9b49                      	sbis PIND,1
-000021 c010                      	rjmp K3pressed
+00001c 9b49                      	sbis PIND,1
+00001d c00e                      	rjmp K3pressed
+00001e 9a5d                      	sbi PORTD,5
                                  
                                  	; check row 4
-000022 985c                      	cbi PORTD,4
-000023 9a5d                      	sbi PORTD,5
-000024 9a5e                      	sbi PORTD,6
-000025 9a5f                      	sbi PORTD,7
-000026 0000                      	nop
-                                 
-000027 9b48                      	sbis PIND,0
-000028 c00d                      	rjmp KCpressed
-000029 9b49                      	sbis PIND,1
-00002a c009                      	rjmp KBpressed
-00002b 9b4a                      	sbis PIND,2
-00002c c003                      	rjmp K0pressed
-00002d 9b4b                      	sbis PIND,3
-00002e c009                      	rjmp KApressed
+00001f 985c                      	cbi PORTD,4
+000020 9b48                      	sbis PIND,0
+000021 c00e                      	rjmp KCpressed
+000022 9b49                      	sbis PIND,1
+000023 c00a                      	rjmp KBpressed
+000024 9b4a                      	sbis PIND,2
+000025 c004                      	rjmp K0pressed
+000026 9b4b                      	sbis PIND,3
+000027 c00a                      	rjmp KApressed
+000028 9a5c                      	sbi PORTD,4
                                  
                                  end_keyboard:
-00002f 9508                      	ret
+000029 9508                      	ret
                                  
                                  K0pressed:
                                  	; set direction to left
-000030 e058                      	ldi V, 0b0000_1000
-000031 cffd                      	rjmp end_keyboard
+00002a e058                      	ldi V, 0b0000_1000
+00002b cffd                      	rjmp end_keyboard
                                  K3pressed:
                                  	; set direction to up
-000032 e054                      	ldi V, 0b0000_0100
-000033 cffb                      	rjmp end_keyboard
+00002c e054                      	ldi V, 0b0000_0100
+00002d cffb                      	rjmp end_keyboard
                                  KBpressed:
                                  	; set direction to down
-000034 e052                      	ldi V, 0b0000_0010
-000035 cff9                      	rjmp end_keyboard
+00002e e052                      	ldi V, 0b0000_0010
+00002f cff9                      	rjmp end_keyboard
                                  KCpressed:
                                  	; set direction to right
-000036 e051                      	ldi V, 0b0000_0001
-000037 cff7                      	rjmp end_keyboard
+000030 e051                      	ldi V, 0b0000_0001
+000031 cff7                      	rjmp end_keyboard
                                  
                                  KApressed:
                                  	; begin button
-000038 d285                      	rcall initialConditions
+000032 d285                      	rcall initialConditions
                                  
-000039 9120 0084                 	lds RANDOM_POS, TCNT1L
-00003b d223                      	rcall randomXpos
-00003c 9320 0200                 	sts FRUITXADDR, RANDOM_POS
-00003e 9120 0085                 	lds RANDOM_POS, TCNT1H
-000040 d223                      	rcall randomYpos
-000041 9320 0201                 	sts FRUITYADDR, RANDOM_POS
-000043 cfeb                      	rjmp end_keyboard
+000033 9120 0084                 	lds RANDOM_POS, TCNT1L
+000035 d223                      	rcall randomXpos
+000036 9320 0200                 	sts FRUITXADDR, RANDOM_POS
+000038 9120 0085                 	lds RANDOM_POS, TCNT1H
+00003a d223                      	rcall randomYpos
+00003b 9320 0201                 	sts FRUITYADDR, RANDOM_POS
+00003d cfeb                      	rjmp end_keyboard
                                  
                                  
                                  
@@ -1174,161 +1166,161 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm(61): Inclu
                                   */ 
                                  
                                   move:
-000044 e0d1                      	ldi YH, HIGH(HEADXADDR)
-000045 e0c0                      	ldi YL, LOW(HEADXADDR)
-000046 937f                      	push LENGTH
-000047 0f77                      	add LENGTH, LENGTH
-000048 5072                      	subi LENGTH, 2
-000049 0fc7                      	add YL, LENGTH
-00004a 917f                      	pop LENGTH
-00004b 2f67                      	mov COUNTER_MOVE, LENGTH
+00003e e0d1                      	ldi YH, HIGH(HEADXADDR)
+00003f e0c0                      	ldi YL, LOW(HEADXADDR)
+000040 937f                      	push LENGTH
+000041 0f77                      	add LENGTH, LENGTH
+000042 5072                      	subi LENGTH, 2
+000043 0fc7                      	add YL, LENGTH
+000044 917f                      	pop LENGTH
+000045 2f67                      	mov COUNTER_MOVE, LENGTH
                                  	for_move:
-00004c 3061                      		cpi COUNTER_MOVE, 1
-00004d f031                      		breq do_move
-00004e 913a                      		ld POS_Y, -Y
-00004f 933f                      		push POS_Y
-000050 914a                      		ld POS_X, -Y
-000051 934f                      		push POS_X
-000052 956a                      		dec COUNTER_MOVE
-000053 cff8                      		rjmp for_move
+000046 3061                      		cpi COUNTER_MOVE, 1
+000047 f031                      		breq do_move
+000048 913a                      		ld POS_Y, -Y
+000049 933f                      		push POS_Y
+00004a 914a                      		ld POS_X, -Y
+00004b 934f                      		push POS_X
+00004c 956a                      		dec COUNTER_MOVE
+00004d cff8                      		rjmp for_move
                                  
                                  	do_move:
-000054 3051                      		cpi V, 0b0000_0001
-000055 f039                      			breq move_right
-000056 3058                      		cpi V, 0b0000_1000
-000057 f039                      			breq move_left
-000058 3052                      		cpi V, 0b0000_0010
-000059 f049                      			breq move_down
-00005a 3054                      		cpi V, 0b0000_0100
-00005b f029                      			breq move_up
+00004e 3051                      		cpi V, 0b0000_0001
+00004f f039                      			breq move_right
+000050 3058                      		cpi V, 0b0000_1000
+000051 f039                      			breq move_left
+000052 3052                      		cpi V, 0b0000_0010
+000053 f049                      			breq move_down
+000054 3054                      		cpi V, 0b0000_0100
+000055 f029                      			breq move_up
                                  
-00005c c008                      		rjmp end_move
+000056 c008                      		rjmp end_move
                                  
                                  		move_right:
-00005d d03f                      			rcall go_right
-00005e c006                      			rjmp end_move
+000057 d03f                      			rcall go_right
+000058 c006                      			rjmp end_move
                                  		move_left:
-00005f d031                      			rcall go_left
-000060 c004                      			rjmp end_move
+000059 d031                      			rcall go_left
+00005a c004                      			rjmp end_move
                                  		move_up:
-000061 d011                      			rcall go_up
-000062 c002                      			rjmp end_move
+00005b d011                      			rcall go_up
+00005c c002                      			rjmp end_move
                                  		move_down:
-000063 d01e                      			rcall go_down
-000064 c000                      			rjmp end_move
+00005d d01e                      			rcall go_down
+00005e c000                      			rjmp end_move
                                  		end_move:
-000065 e0d1                      			ldi YH, HIGH(HEADXADDR)
-000066 e0c0                      			ldi YL, LOW(HEADXADDR)
-000067 2f67                      			mov COUNTER_MOVE, LENGTH
+00005f e0d1                      			ldi YH, HIGH(HEADXADDR)
+000060 e0c0                      			ldi YL, LOW(HEADXADDR)
+000061 2f67                      			mov COUNTER_MOVE, LENGTH
                                  			for_end_move:
-000068 3061                      				cpi COUNTER_MOVE, 1
-000069 f031                      				breq do_end_move
-00006a 9349                      				st Y+, POS_X
-00006b 9339                      				st Y+, POS_Y
-00006c 914f                      				pop POS_X
-00006d 913f                      				pop POS_Y
-00006e 956a                      				dec COUNTER_MOVE
-00006f cff8                      				rjmp for_end_move
+000062 3061                      				cpi COUNTER_MOVE, 1
+000063 f031                      				breq do_end_move
+000064 9349                      				st Y+, POS_X
+000065 9339                      				st Y+, POS_Y
+000066 914f                      				pop POS_X
+000067 913f                      				pop POS_Y
+000068 956a                      				dec COUNTER_MOVE
+000069 cff8                      				rjmp for_end_move
                                  		do_end_move:
-000070 9349                      			st Y+, POS_X
-000071 8338                      			st Y, POS_Y
-000072 9508                      			ret
+00006a 9349                      			st Y+, POS_X
+00006b 8338                      			st Y, POS_Y
+00006c 9508                      			ret
                                  
                                  
                                  go_up:
-000073 3030                      	cpi POS_Y, 0
-000074 f009                      	breq boundary_up
-000075 c009                      	rjmp do_go_up
+00006d 3030                      	cpi POS_Y, 0
+00006e f009                      	breq boundary_up
+00006f c009                      	rjmp do_go_up
                                  	boundary_up:
-000076 3248                      		cpi POS_X, 40
-000077 f00a                      		brmi up_from_top
-000078 c003                      		rjmp up_from_bottom
+000070 3248                      		cpi POS_X, 40
+000071 f00a                      		brmi up_from_top
+000072 c003                      		rjmp up_from_bottom
                                  
                                  	up_from_top:
-000079 e036                      		ldi POS_Y, 6
-00007a 5d48                      		subi POS_X, 216 ; -216 = +40 (offset to change top to down screen)
-00007b c005                      		rjmp go_up_end
+000073 e036                      		ldi POS_Y, 6
+000074 5d48                      		subi POS_X, 216 ; -216 = +40 (offset to change top to down screen)
+000075 c005                      		rjmp go_up_end
                                  
                                  	up_from_bottom:
-00007c e036                      	 	ldi POS_Y, 6
-00007d 5248                      		subi POS_X, 40 ; sub offset to change down to top screen
-00007e c002                      		rjmp go_up_end
+000076 e036                      	 	ldi POS_Y, 6
+000077 5248                      		subi POS_X, 40 ; sub offset to change down to top screen
+000078 c002                      		rjmp go_up_end
                                  
                                  	do_go_up:
-00007f 953a                      		dec POS_Y
-000080 c000                      		rjmp go_up_end
+000079 953a                      		dec POS_Y
+00007a c000                      		rjmp go_up_end
                                  	go_up_end:
-000081 9508                      		ret
+00007b 9508                      		ret
                                  
                                  go_down:
-000082 3036                      	cpi POS_Y, 6
-000083 f009                      	breq boundary_down
-000084 c009                      	rjmp do_go_down
+00007c 3036                      	cpi POS_Y, 6
+00007d f009                      	breq boundary_down
+00007e c009                      	rjmp do_go_down
                                  
                                  	boundary_down:
-000085 3248                      		cpi POS_X, 40
-000086 f00a                      		brmi down_from_top
-000087 c003                      		rjmp down_from_bottom
+00007f 3248                      		cpi POS_X, 40
+000080 f00a                      		brmi down_from_top
+000081 c003                      		rjmp down_from_bottom
                                  
                                  	down_from_top:
-000088 e030                      		ldi POS_Y, 0
-000089 5d48                      		subi POS_X, 216 ; -216=+40 (offset to change top to down screen)
-00008a c005                      		rjmp go_down_end
+000082 e030                      		ldi POS_Y, 0
+000083 5d48                      		subi POS_X, 216 ; -216=+40 (offset to change top to down screen)
+000084 c005                      		rjmp go_down_end
                                  
                                  	down_from_bottom:
-00008b e030                      	 	ldi POS_Y, 0
-00008c 5248                      		subi POS_X, 40 ; sub offset to change down to top screen
-00008d c002                      		rjmp go_down_end
+000085 e030                      	 	ldi POS_Y, 0
+000086 5248                      		subi POS_X, 40 ; sub offset to change down to top screen
+000087 c002                      		rjmp go_down_end
                                  
                                  	do_go_down:
-00008e 9533                      		inc POS_Y
-00008f c000                      		rjmp go_down_end
+000088 9533                      		inc POS_Y
+000089 c000                      		rjmp go_down_end
                                  	go_down_end:
-000090 9508                      		ret
+00008a 9508                      		ret
                                  
                                  go_left:
-000091 3040                      	cpi POS_X, 0
-000092 f019                      	breq boudary_up_left
-000093 3248                      	cpi POS_X, 40
-000094 f019                      	breq boudary_down_left
-000095 c004                      	rjmp do_go_left
+00008b 3040                      	cpi POS_X, 0
+00008c f019                      	breq boudary_up_left
+00008d 3248                      	cpi POS_X, 40
+00008e f019                      	breq boudary_down_left
+00008f c004                      	rjmp do_go_left
                                  
                                  	boudary_up_left:
-000096 e247                      		ldi POS_X, 39
-000097 c004                      		rjmp go_left_end
+000090 e247                      		ldi POS_X, 39
+000091 c004                      		rjmp go_left_end
                                  
                                  	boudary_down_left:
-000098 e44f                      		ldi POS_X, X_MAX
-000099 c002                      		rjmp go_left_end	
+000092 e44f                      		ldi POS_X, X_MAX
+000093 c002                      		rjmp go_left_end	
                                  
                                  	do_go_left:
-00009a 954a                      		dec POS_X
-00009b c000                      		rjmp go_left_end
+000094 954a                      		dec POS_X
+000095 c000                      		rjmp go_left_end
                                  	go_left_end:
-00009c 9508                      		ret
+000096 9508                      		ret
                                  
                                  go_right:
-00009d 3247                      	cpi POS_X, 39
-00009e f019                      	breq boudary_up_right
-00009f 344f                      	cpi POS_X, X_MAX
-0000a0 f019                      	breq boudary_down_right
-0000a1 c004                      	rjmp do_go_right
+000097 3247                      	cpi POS_X, 39
+000098 f019                      	breq boudary_up_right
+000099 344f                      	cpi POS_X, X_MAX
+00009a f019                      	breq boudary_down_right
+00009b c004                      	rjmp do_go_right
                                  
                                  	boudary_up_right:
-0000a2 e040                      		ldi POS_X, 0
-0000a3 cff8                      		rjmp go_left_end
+00009c e040                      		ldi POS_X, 0
+00009d cff8                      		rjmp go_left_end
                                  
                                  	boudary_down_right:
-0000a4 e248                      		ldi POS_X, 40
-0000a5 cff6                      		rjmp go_left_end	
+00009e e248                      		ldi POS_X, 40
+00009f cff6                      		rjmp go_left_end	
                                  
                                  	do_go_right:
-0000a6 9543                      		inc POS_X
-0000a7 c000                      		rjmp go_right_end
+0000a0 9543                      		inc POS_X
+0000a1 c000                      		rjmp go_right_end
                                  
                                  	go_right_end:
                                  .include "Display.inc"
-0000a8 9508                      
+0000a2 9508                      
                                   * Display.inc
                                   *
                                   *  Created: 5/19/2018 2:09:20 PM
@@ -1336,72 +1328,72 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm(61): Inclu
                                   */ 
                                  
                                   display:
-0000a9 e0b1                      	ldi XH, HIGH(HEADXADDR)
-0000aa e0a0                      	ldi XL, LOW(HEADXADDR)
+0000a3 e0b1                      	ldi XH, HIGH(HEADXADDR)
+0000a4 e0a0                      	ldi XL, LOW(HEADXADDR)
                                  	; plot the snake
-0000ab 2f17                      	mov COUNTER_POS, LENGTH
+0000a5 2f17                      	mov COUNTER_POS, LENGTH
                                  	for_display:
-0000ac 3010                      		cpi COUNTER_POS, 0
-0000ad f049                      		breq display_end
-0000ae 931f                      		push COUNTER_POS ; also used in plot_posX,Y
-0000af 919d                      		ld SYMBOL, X+ ; symbol = posX
-0000b0 d00e                      		rcall plot_posX
-0000b1 919d                      		ld SYMBOL, X+ ; symbol = posY
-0000b2 d017                      		rcall plot_posY
-0000b3 d02a                      		rcall enableLatch
-0000b4 911f                      		pop COUNTER_POS ; recover from RAM
-0000b5 951a                      		dec COUNTER_POS
-0000b6 cff5                      		rjmp for_display
+0000a6 3010                      		cpi COUNTER_POS, 0
+0000a7 f049                      		breq display_end
+0000a8 931f                      		push COUNTER_POS ; also used in plot_posX,Y
+0000a9 919d                      		ld SYMBOL, X+ ; symbol = posX
+0000aa d00e                      		rcall plot_posX
+0000ab 919d                      		ld SYMBOL, X+ ; symbol = posY
+0000ac d017                      		rcall plot_posY
+0000ad d02a                      		rcall enableLatch
+0000ae 911f                      		pop COUNTER_POS ; recover from RAM
+0000af 951a                      		dec COUNTER_POS
+0000b0 cff5                      		rjmp for_display
                                  	display_end:
                                  		; plot the fruit and return
-0000b7 9190 0200                 		lds SYMBOL, FRUITXADDR ; symbol = posX
-0000b9 d005                      		rcall plot_posX
-0000ba 9190 0201                 		lds SYMBOL, FRUITYADDR ; symbol = posY
-0000bc d00d                      		rcall plot_posY
-0000bd d020                      		rcall enableLatch
-0000be 9508                      		ret
+0000b1 9190 0200                 		lds SYMBOL, FRUITXADDR ; symbol = posX
+0000b3 d005                      		rcall plot_posX
+0000b4 9190 0201                 		lds SYMBOL, FRUITYADDR ; symbol = posY
+0000b6 d00d                      		rcall plot_posY
+0000b7 d020                      		rcall enableLatch
+0000b8 9508                      		ret
                                  
                                  plot_posX:
-0000bf e41f                      	ldi COUNTER_POS, X_MAX
+0000b9 e41f                      	ldi COUNTER_POS, X_MAX
                                  	; to make 80 - POS, do the 3 following lines
                                  /*	subi POS, 80 ; X_MAX + 1
                                  	ldi R17, 0b1111_1111 ; xor with 1111_1111 reverse the bits
                                  	eor POS, R17 ; it is done to take into account the fact that the first bit written are the last in the screen*/
                                  	comparePosX:
-0000c0 1791                      		cp SYMBOL, COUNTER_POS
-0000c1 f029                      		breq foundPosX
-0000c2 d013                      		rcall write_0
+0000ba 1791                      		cp SYMBOL, COUNTER_POS
+0000bb f029                      		breq foundPosX
+0000bc d013                      		rcall write_0
                                  	checkEndPlotX:
-0000c3 3010                      		cpi COUNTER_POS, 0
-0000c4 f021                      		breq endPlotX
-0000c5 951a                      		dec COUNTER_POS
-0000c6 cff9                      		rjmp comparePosX
+0000bd 3010                      		cpi COUNTER_POS, 0
+0000be f021                      		breq endPlotX
+0000bf 951a                      		dec COUNTER_POS
+0000c0 cff9                      		rjmp comparePosX
                                  	foundPosX:
-0000c7 d012                      		rcall write_1
-0000c8 cffa                      		rjmp checkEndPlotX
+0000c1 d012                      		rcall write_1
+0000c2 cffa                      		rjmp checkEndPlotX
                                  	endPlotX:
-0000c9 9508                      		ret
+0000c3 9508                      		ret
                                  
                                  plot_posY:
-0000ca e016                      	ldi COUNTER_POS, Y_MAX
+0000c4 e016                      	ldi COUNTER_POS, Y_MAX
                                  /*	subi POS, 7 ; Y_MAX + 1
                                  	ldi R17, 0b1111_1111 ; xor with 1111_1111 reverse the bits
                                  	eor POS, R17 ; it is done to take into account the fact that the first bit written are the last in the screen*/
-0000cb d00a                      	rcall write_0 ; to complete the register of rows
+0000c5 d00a                      	rcall write_0 ; to complete the register of rows
                                  	comparePosY:
-0000cc 1791                      		cp SYMBOL, COUNTER_POS
-0000cd f029                      		breq foundPosY
-0000ce d007                      		rcall write_0
+0000c6 1791                      		cp SYMBOL, COUNTER_POS
+0000c7 f029                      		breq foundPosY
+0000c8 d007                      		rcall write_0
                                  	checkEndPlotY:
-0000cf 3010                      		cpi COUNTER_POS, 0
-0000d0 f021                      		breq endPlotY
-0000d1 951a                      		dec COUNTER_POS
-0000d2 cff9                      		rjmp comparePosY
+0000c9 3010                      		cpi COUNTER_POS, 0
+0000ca f021                      		breq endPlotY
+0000cb 951a                      		dec COUNTER_POS
+0000cc cff9                      		rjmp comparePosY
                                  	foundPosY:
-0000d3 d006                      		rcall write_1
-0000d4 cffa                      		rjmp checkEndPlotY
+0000cd d006                      		rcall write_1
+0000ce cffa                      		rjmp checkEndPlotY
                                  	endPlotY:
-0000d5 9508                      		ret
+0000cf 9508                      		ret
                                  
                                  
                                  write_0:
@@ -1409,378 +1401,378 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm(61): Inclu
                                  	; to do that: 
                                  	; 1- generate your bit with PB3
                                  	; 2- generate a clock rising/falling edge with PB5
-0000d6 982b                      	cbi PORTB,3
-0000d7 9a2d                      	sbi PORTB,5
-0000d8 982d                      	cbi PORTB,5
-0000d9 9508                      	ret
+0000d0 982b                      	cbi PORTB,3
+0000d1 9a2d                      	sbi PORTB,5
+0000d2 982d                      	cbi PORTB,5
+0000d3 9508                      	ret
                                  
                                  write_1:
                                  	; will write a 1 on the shift register (8 bit register)
                                  	; to do that: 
                                  	; 1- generate your bit with PB3
                                  	; 2- generate a clock rising/falling edge with PB5
-0000da 9a2b                      	sbi PORTB,3
-0000db 9a2d                      	sbi PORTB,5
-0000dc 982d                      	cbi PORTB,5
-0000dd 9508                      	ret
+0000d4 9a2b                      	sbi PORTB,3
+0000d5 9a2d                      	sbi PORTB,5
+0000d6 982d                      	cbi PORTB,5
+0000d7 9508                      	ret
                                  
                                  enableLatch:
                                  	; will enable the output of the shift register
                                  	; by setting then clearing PB4
-0000de 9a2c                      	sbi PORTB,4
-0000df d002                      	rcall wait
-0000e0 982c                      	cbi PORTB,4
-0000e1 9508                      	ret
+0000d8 9a2c                      	sbi PORTB,4
+0000d9 d002                      	rcall wait
+0000da 982c                      	cbi PORTB,4
+0000db 9508                      	ret
                                  
                                  wait:
-0000e2 ec0e                      	ldi R16,COUNTER_OFFSET
-0000e3 bd06                      	out TCNT0,R16 ; set counter init
-0000e4 9aa8                      	sbi TIFR0, TOV0 ; set interrupt bit to 1
+0000dc ec0e                      	ldi R16,COUNTER_OFFSET
+0000dd bd06                      	out TCNT0,R16 ; set counter init
+0000de 9aa8                      	sbi TIFR0, TOV0 ; set interrupt bit to 1
                                  	loop_wait:
-0000e5 9ba8                      		sbis TIFR0, TOV0
-0000e6 cffe                      		rjmp loop_wait
-0000e7 9508                      	ret
+0000df 9ba8                      		sbis TIFR0, TOV0
+0000e0 cffe                      		rjmp loop_wait
+0000e1 9508                      	ret
                                  
                                   displayScore:
-0000e8 9508                      	ret
+0000e2 9508                      	ret
                                  
                                  displayGameOver:
                                  	; enable columns of row 1
-0000e9 e090                      	ldi SYMBOL, 0b0000_0000
-0000ea d12c                      	rcall write_symbol
-0000eb e090                      	ldi SYMBOL, 0b0000_0000
-0000ec d12a                      	rcall write_symbol
-0000ed e19e                      	ldi SYMBOL, 0b0001_1110
-0000ee d128                      	rcall write_symbol
-0000ef e19f                      	ldi SYMBOL, 0b0001_1111
-0000f0 d126                      	rcall write_symbol
-0000f1 e191                      	ldi SYMBOL, 0b0001_0001
-0000f2 d124                      	rcall write_symbol
-0000f3 e09e                      	ldi SYMBOL, 0b0000_1110
-0000f4 d122                      	rcall write_symbol
+0000e3 e090                      	ldi SYMBOL, 0b0000_0000
+0000e4 d12c                      	rcall write_symbol
+0000e5 e090                      	ldi SYMBOL, 0b0000_0000
+0000e6 d12a                      	rcall write_symbol
+0000e7 e19e                      	ldi SYMBOL, 0b0001_1110
+0000e8 d128                      	rcall write_symbol
+0000e9 e19f                      	ldi SYMBOL, 0b0001_1111
+0000ea d126                      	rcall write_symbol
+0000eb e191                      	ldi SYMBOL, 0b0001_0001
+0000ec d124                      	rcall write_symbol
+0000ed e09e                      	ldi SYMBOL, 0b0000_1110
+0000ee d122                      	rcall write_symbol
+0000ef e090                      	ldi SYMBOL, 0b0000_0000
+0000f0 d120                      	rcall write_symbol
+0000f1 e090                      	ldi SYMBOL, 0b0000_0000
+0000f2 d11e                      	rcall write_symbol
+0000f3 e090                      	ldi SYMBOL, 0b0000_0000
+0000f4 d11c                      	rcall write_symbol
 0000f5 e090                      	ldi SYMBOL, 0b0000_0000
-0000f6 d120                      	rcall write_symbol
-0000f7 e090                      	ldi SYMBOL, 0b0000_0000
-0000f8 d11e                      	rcall write_symbol
-0000f9 e090                      	ldi SYMBOL, 0b0000_0000
-0000fa d11c                      	rcall write_symbol
-0000fb e090                      	ldi SYMBOL, 0b0000_0000
-0000fc d11a                      	rcall write_symbol
+0000f6 d11a                      	rcall write_symbol
+0000f7 e19f                      	ldi SYMBOL, 0b0001_1111
+0000f8 d118                      	rcall write_symbol
+0000f9 e191                      	ldi SYMBOL, 0b0001_0001
+0000fa d116                      	rcall write_symbol
+0000fb e09e                      	ldi SYMBOL, 0b0000_1110
+0000fc d114                      	rcall write_symbol
 0000fd e19f                      	ldi SYMBOL, 0b0001_1111
-0000fe d118                      	rcall write_symbol
-0000ff e191                      	ldi SYMBOL, 0b0001_0001
-000100 d116                      	rcall write_symbol
-000101 e09e                      	ldi SYMBOL, 0b0000_1110
-000102 d114                      	rcall write_symbol
-000103 e19f                      	ldi SYMBOL, 0b0001_1111
-000104 d112                      	rcall write_symbol
-000105 e090                      	ldi SYMBOL, 0b0000_0000
-000106 d110                      	rcall write_symbol
-000107 e090                      	ldi SYMBOL, 0b0000_0000
-000108 d10e                      	rcall write_symbol
+0000fe d112                      	rcall write_symbol
+0000ff e090                      	ldi SYMBOL, 0b0000_0000
+000100 d110                      	rcall write_symbol
+000101 e090                      	ldi SYMBOL, 0b0000_0000
+000102 d10e                      	rcall write_symbol
                                  	; enable row 1
-000109 d0ce                      	rcall enable_row_1
-00010a dfd3                      	rcall enableLatch
+000103 d0ce                      	rcall enable_row_1
+000104 dfd3                      	rcall enableLatch
                                  
                                  	; enable columns of row 2
-00010b e090                      	ldi SYMBOL, 0b0000_0000
-00010c d10a                      	rcall write_symbol
-00010d e090                      	ldi SYMBOL, 0b0000_0000
-00010e d108                      	rcall write_symbol
+000105 e090                      	ldi SYMBOL, 0b0000_0000
+000106 d10a                      	rcall write_symbol
+000107 e090                      	ldi SYMBOL, 0b0000_0000
+000108 d108                      	rcall write_symbol
+000109 e191                      	ldi SYMBOL, 0b0001_0001
+00010a d106                      	rcall write_symbol
+00010b e190                      	ldi SYMBOL, 0b0001_0000
+00010c d104                      	rcall write_symbol
+00010d e191                      	ldi SYMBOL, 0b0001_0001
+00010e d102                      	rcall write_symbol
 00010f e191                      	ldi SYMBOL, 0b0001_0001
-000110 d106                      	rcall write_symbol
-000111 e190                      	ldi SYMBOL, 0b0001_0000
-000112 d104                      	rcall write_symbol
-000113 e191                      	ldi SYMBOL, 0b0001_0001
-000114 d102                      	rcall write_symbol
-000115 e191                      	ldi SYMBOL, 0b0001_0001
-000116 d100                      	rcall write_symbol
+000110 d100                      	rcall write_symbol
+000111 e090                      	ldi SYMBOL, 0b0000_0000
+000112 d0fe                      	rcall write_symbol
+000113 e090                      	ldi SYMBOL, 0b0000_0000
+000114 d0fc                      	rcall write_symbol
+000115 e090                      	ldi SYMBOL, 0b0000_0000
+000116 d0fa                      	rcall write_symbol
 000117 e090                      	ldi SYMBOL, 0b0000_0000
-000118 d0fe                      	rcall write_symbol
-000119 e090                      	ldi SYMBOL, 0b0000_0000
-00011a d0fc                      	rcall write_symbol
-00011b e090                      	ldi SYMBOL, 0b0000_0000
-00011c d0fa                      	rcall write_symbol
-00011d e090                      	ldi SYMBOL, 0b0000_0000
-00011e d0f8                      	rcall write_symbol
+000118 d0f8                      	rcall write_symbol
+000119 e190                      	ldi SYMBOL, 0b0001_0000
+00011a d0f6                      	rcall write_symbol
+00011b e19b                      	ldi SYMBOL, 0b0001_1011
+00011c d0f4                      	rcall write_symbol
+00011d e191                      	ldi SYMBOL, 0b0001_0001
+00011e d0f2                      	rcall write_symbol
 00011f e190                      	ldi SYMBOL, 0b0001_0000
-000120 d0f6                      	rcall write_symbol
-000121 e19b                      	ldi SYMBOL, 0b0001_1011
-000122 d0f4                      	rcall write_symbol
-000123 e191                      	ldi SYMBOL, 0b0001_0001
-000124 d0f2                      	rcall write_symbol
-000125 e190                      	ldi SYMBOL, 0b0001_0000
-000126 d0f0                      	rcall write_symbol
-000127 e090                      	ldi SYMBOL, 0b0000_0000
-000128 d0ee                      	rcall write_symbol
-000129 e090                      	ldi SYMBOL, 0b0000_0000
-00012a d0ec                      	rcall write_symbol
+000120 d0f0                      	rcall write_symbol
+000121 e090                      	ldi SYMBOL, 0b0000_0000
+000122 d0ee                      	rcall write_symbol
+000123 e090                      	ldi SYMBOL, 0b0000_0000
+000124 d0ec                      	rcall write_symbol
                                  	; enable row 2
-00012b d0b5                      	rcall enable_row_2
-00012c dfb1                      	rcall enableLatch
+000125 d0b5                      	rcall enable_row_2
+000126 dfb1                      	rcall enableLatch
                                  
                                  	; enable columns of row 3
-00012d e090                      	ldi SYMBOL, 0b0000_0000
-00012e d0e8                      	rcall write_symbol
-00012f e090                      	ldi SYMBOL, 0b0000_0000
-000130 d0e6                      	rcall write_symbol
+000127 e090                      	ldi SYMBOL, 0b0000_0000
+000128 d0e8                      	rcall write_symbol
+000129 e090                      	ldi SYMBOL, 0b0000_0000
+00012a d0e6                      	rcall write_symbol
+00012b e191                      	ldi SYMBOL, 0b0001_0001
+00012c d0e4                      	rcall write_symbol
+00012d e190                      	ldi SYMBOL, 0b0001_0000
+00012e d0e2                      	rcall write_symbol
+00012f e191                      	ldi SYMBOL, 0b0001_0001
+000130 d0e0                      	rcall write_symbol
 000131 e191                      	ldi SYMBOL, 0b0001_0001
-000132 d0e4                      	rcall write_symbol
-000133 e190                      	ldi SYMBOL, 0b0001_0000
-000134 d0e2                      	rcall write_symbol
-000135 e191                      	ldi SYMBOL, 0b0001_0001
-000136 d0e0                      	rcall write_symbol
-000137 e191                      	ldi SYMBOL, 0b0001_0001
-000138 d0de                      	rcall write_symbol
+000132 d0de                      	rcall write_symbol
+000133 e090                      	ldi SYMBOL, 0b0000_0000
+000134 d0dc                      	rcall write_symbol
+000135 e090                      	ldi SYMBOL, 0b0000_0000
+000136 d0da                      	rcall write_symbol
+000137 e090                      	ldi SYMBOL, 0b0000_0000
+000138 d0d8                      	rcall write_symbol
 000139 e090                      	ldi SYMBOL, 0b0000_0000
-00013a d0dc                      	rcall write_symbol
-00013b e090                      	ldi SYMBOL, 0b0000_0000
-00013c d0da                      	rcall write_symbol
-00013d e090                      	ldi SYMBOL, 0b0000_0000
-00013e d0d8                      	rcall write_symbol
-00013f e090                      	ldi SYMBOL, 0b0000_0000
-000140 d0d6                      	rcall write_symbol
+00013a d0d6                      	rcall write_symbol
+00013b e190                      	ldi SYMBOL, 0b0001_0000
+00013c d0d4                      	rcall write_symbol
+00013d e195                      	ldi SYMBOL, 0b0001_0101
+00013e d0d2                      	rcall write_symbol
+00013f e191                      	ldi SYMBOL, 0b0001_0001
+000140 d0d0                      	rcall write_symbol
 000141 e190                      	ldi SYMBOL, 0b0001_0000
-000142 d0d4                      	rcall write_symbol
-000143 e195                      	ldi SYMBOL, 0b0001_0101
-000144 d0d2                      	rcall write_symbol
-000145 e191                      	ldi SYMBOL, 0b0001_0001
-000146 d0d0                      	rcall write_symbol
-000147 e190                      	ldi SYMBOL, 0b0001_0000
-000148 d0ce                      	rcall write_symbol
-000149 e090                      	ldi SYMBOL, 0b0000_0000
-00014a d0cc                      	rcall write_symbol
-00014b e090                      	ldi SYMBOL, 0b0000_0000
-00014c d0ca                      	rcall write_symbol
+000142 d0ce                      	rcall write_symbol
+000143 e090                      	ldi SYMBOL, 0b0000_0000
+000144 d0cc                      	rcall write_symbol
+000145 e090                      	ldi SYMBOL, 0b0000_0000
+000146 d0ca                      	rcall write_symbol
                                  	; enable row 3
-00014d d09c                      	rcall enable_row_3
-00014e df8f                      	rcall enableLatch
+000147 d09c                      	rcall enable_row_3
+000148 df8f                      	rcall enableLatch
                                  
                                  	; enable columns of row 4
-00014f e090                      	ldi SYMBOL, 0b0000_0000
-000150 d0c6                      	rcall write_symbol
-000151 e090                      	ldi SYMBOL, 0b0000_0000
-000152 d0c4                      	rcall write_symbol
-000153 e19e                      	ldi SYMBOL, 0b0001_1110
-000154 d0c2                      	rcall write_symbol
-000155 e19f                      	ldi SYMBOL, 0b0001_1111
-000156 d0c0                      	rcall write_symbol
-000157 e191                      	ldi SYMBOL, 0b0001_0001
-000158 d0be                      	rcall write_symbol
-000159 e191                      	ldi SYMBOL, 0b0001_0001
-00015a d0bc                      	rcall write_symbol
+000149 e090                      	ldi SYMBOL, 0b0000_0000
+00014a d0c6                      	rcall write_symbol
+00014b e090                      	ldi SYMBOL, 0b0000_0000
+00014c d0c4                      	rcall write_symbol
+00014d e19e                      	ldi SYMBOL, 0b0001_1110
+00014e d0c2                      	rcall write_symbol
+00014f e19f                      	ldi SYMBOL, 0b0001_1111
+000150 d0c0                      	rcall write_symbol
+000151 e191                      	ldi SYMBOL, 0b0001_0001
+000152 d0be                      	rcall write_symbol
+000153 e191                      	ldi SYMBOL, 0b0001_0001
+000154 d0bc                      	rcall write_symbol
+000155 e090                      	ldi SYMBOL, 0b0000_0000
+000156 d0ba                      	rcall write_symbol
+000157 e090                      	ldi SYMBOL, 0b0000_0000
+000158 d0b8                      	rcall write_symbol
+000159 e090                      	ldi SYMBOL, 0b0000_0000
+00015a d0b6                      	rcall write_symbol
 00015b e090                      	ldi SYMBOL, 0b0000_0000
-00015c d0ba                      	rcall write_symbol
-00015d e090                      	ldi SYMBOL, 0b0000_0000
-00015e d0b8                      	rcall write_symbol
-00015f e090                      	ldi SYMBOL, 0b0000_0000
-000160 d0b6                      	rcall write_symbol
-000161 e090                      	ldi SYMBOL, 0b0000_0000
-000162 d0b4                      	rcall write_symbol
-000163 e19f                      	ldi SYMBOL, 0b0001_1111
-000164 d0b2                      	rcall write_symbol
-000165 e191                      	ldi SYMBOL, 0b0001_0001
-000166 d0b0                      	rcall write_symbol
-000167 e19f                      	ldi SYMBOL, 0b0001_1111
-000168 d0ae                      	rcall write_symbol
-000169 e193                      	ldi SYMBOL, 0b0001_0011
-00016a d0ac                      	rcall write_symbol
-00016b e090                      	ldi SYMBOL, 0b0000_0000
-00016c d0aa                      	rcall write_symbol
-00016d e090                      	ldi SYMBOL, 0b0000_0000
-00016e d0a8                      	rcall write_symbol
+00015c d0b4                      	rcall write_symbol
+00015d e19f                      	ldi SYMBOL, 0b0001_1111
+00015e d0b2                      	rcall write_symbol
+00015f e191                      	ldi SYMBOL, 0b0001_0001
+000160 d0b0                      	rcall write_symbol
+000161 e19f                      	ldi SYMBOL, 0b0001_1111
+000162 d0ae                      	rcall write_symbol
+000163 e193                      	ldi SYMBOL, 0b0001_0011
+000164 d0ac                      	rcall write_symbol
+000165 e090                      	ldi SYMBOL, 0b0000_0000
+000166 d0aa                      	rcall write_symbol
+000167 e090                      	ldi SYMBOL, 0b0000_0000
+000168 d0a8                      	rcall write_symbol
                                  	; enable row 4
-00016f d083                      	rcall enable_row_4
-000170 df6d                      	rcall enableLatch
+000169 d083                      	rcall enable_row_4
+00016a df6d                      	rcall enableLatch
                                  
                                  	; enable columns of row 5
-000171 e090                      	ldi SYMBOL, 0b0000_0000
-000172 d0a4                      	rcall write_symbol
-000173 e090                      	ldi SYMBOL, 0b0000_0000
-000174 d0a2                      	rcall write_symbol
-000175 e194                      	ldi SYMBOL, 0b0001_0100
-000176 d0a0                      	rcall write_symbol
-000177 e190                      	ldi SYMBOL, 0b0001_0000
-000178 d09e                      	rcall write_symbol
-000179 e191                      	ldi SYMBOL, 0b0001_0001
-00017a d09c                      	rcall write_symbol
-00017b e191                      	ldi SYMBOL, 0b0001_0001
-00017c d09a                      	rcall write_symbol
+00016b e090                      	ldi SYMBOL, 0b0000_0000
+00016c d0a4                      	rcall write_symbol
+00016d e090                      	ldi SYMBOL, 0b0000_0000
+00016e d0a2                      	rcall write_symbol
+00016f e194                      	ldi SYMBOL, 0b0001_0100
+000170 d0a0                      	rcall write_symbol
+000171 e190                      	ldi SYMBOL, 0b0001_0000
+000172 d09e                      	rcall write_symbol
+000173 e191                      	ldi SYMBOL, 0b0001_0001
+000174 d09c                      	rcall write_symbol
+000175 e191                      	ldi SYMBOL, 0b0001_0001
+000176 d09a                      	rcall write_symbol
+000177 e090                      	ldi SYMBOL, 0b0000_0000
+000178 d098                      	rcall write_symbol
+000179 e090                      	ldi SYMBOL, 0b0000_0000
+00017a d096                      	rcall write_symbol
+00017b e090                      	ldi SYMBOL, 0b0000_0000
+00017c d094                      	rcall write_symbol
 00017d e090                      	ldi SYMBOL, 0b0000_0000
-00017e d098                      	rcall write_symbol
-00017f e090                      	ldi SYMBOL, 0b0000_0000
-000180 d096                      	rcall write_symbol
-000181 e090                      	ldi SYMBOL, 0b0000_0000
-000182 d094                      	rcall write_symbol
-000183 e090                      	ldi SYMBOL, 0b0000_0000
-000184 d092                      	rcall write_symbol
-000185 e190                      	ldi SYMBOL, 0b0001_0000
-000186 d090                      	rcall write_symbol
-000187 e191                      	ldi SYMBOL, 0b0001_0001
-000188 d08e                      	rcall write_symbol
-000189 e191                      	ldi SYMBOL, 0b0001_0001
-00018a d08c                      	rcall write_symbol
-00018b e191                      	ldi SYMBOL, 0b0001_0001
-00018c d08a                      	rcall write_symbol
-00018d e090                      	ldi SYMBOL, 0b0000_0000
-00018e d088                      	rcall write_symbol
-00018f e090                      	ldi SYMBOL, 0b0000_0000
-000190 d086                      	rcall write_symbol
+00017e d092                      	rcall write_symbol
+00017f e190                      	ldi SYMBOL, 0b0001_0000
+000180 d090                      	rcall write_symbol
+000181 e191                      	ldi SYMBOL, 0b0001_0001
+000182 d08e                      	rcall write_symbol
+000183 e191                      	ldi SYMBOL, 0b0001_0001
+000184 d08c                      	rcall write_symbol
+000185 e191                      	ldi SYMBOL, 0b0001_0001
+000186 d08a                      	rcall write_symbol
+000187 e090                      	ldi SYMBOL, 0b0000_0000
+000188 d088                      	rcall write_symbol
+000189 e090                      	ldi SYMBOL, 0b0000_0000
+00018a d086                      	rcall write_symbol
                                  	; enable row 5
-000191 d06a                      	rcall enable_row_5
-000192 df4b                      	rcall enableLatch
+00018b d06a                      	rcall enable_row_5
+00018c df4b                      	rcall enableLatch
                                  
                                  	; enable columns of row 6
-000193 e090                      	ldi SYMBOL, 0b0000_0000
-000194 d082                      	rcall write_symbol
-000195 e090                      	ldi SYMBOL, 0b0000_0000
-000196 d080                      	rcall write_symbol
-000197 e192                      	ldi SYMBOL, 0b0001_0010
-000198 d07e                      	rcall write_symbol
-000199 e190                      	ldi SYMBOL, 0b0001_0000
-00019a d07c                      	rcall write_symbol
-00019b e09a                      	ldi SYMBOL, 0b0000_1010
-00019c d07a                      	rcall write_symbol
-00019d e191                      	ldi SYMBOL, 0b0001_0001
-00019e d078                      	rcall write_symbol
+00018d e090                      	ldi SYMBOL, 0b0000_0000
+00018e d082                      	rcall write_symbol
+00018f e090                      	ldi SYMBOL, 0b0000_0000
+000190 d080                      	rcall write_symbol
+000191 e192                      	ldi SYMBOL, 0b0001_0010
+000192 d07e                      	rcall write_symbol
+000193 e190                      	ldi SYMBOL, 0b0001_0000
+000194 d07c                      	rcall write_symbol
+000195 e09a                      	ldi SYMBOL, 0b0000_1010
+000196 d07a                      	rcall write_symbol
+000197 e191                      	ldi SYMBOL, 0b0001_0001
+000198 d078                      	rcall write_symbol
+000199 e090                      	ldi SYMBOL, 0b0000_0000
+00019a d076                      	rcall write_symbol
+00019b e090                      	ldi SYMBOL, 0b0000_0000
+00019c d074                      	rcall write_symbol
+00019d e090                      	ldi SYMBOL, 0b0000_0000
+00019e d072                      	rcall write_symbol
 00019f e090                      	ldi SYMBOL, 0b0000_0000
-0001a0 d076                      	rcall write_symbol
-0001a1 e090                      	ldi SYMBOL, 0b0000_0000
-0001a2 d074                      	rcall write_symbol
-0001a3 e090                      	ldi SYMBOL, 0b0000_0000
-0001a4 d072                      	rcall write_symbol
-0001a5 e090                      	ldi SYMBOL, 0b0000_0000
-0001a6 d070                      	rcall write_symbol
-0001a7 e190                      	ldi SYMBOL, 0b0001_0000
-0001a8 d06e                      	rcall write_symbol
-0001a9 e191                      	ldi SYMBOL, 0b0001_0001
-0001aa d06c                      	rcall write_symbol
-0001ab e191                      	ldi SYMBOL, 0b0001_0001
-0001ac d06a                      	rcall write_symbol
-0001ad e191                      	ldi SYMBOL, 0b0001_0001
-0001ae d068                      	rcall write_symbol
-0001af e090                      	ldi SYMBOL, 0b0000_0000
-0001b0 d066                      	rcall write_symbol
-0001b1 e090                      	ldi SYMBOL, 0b0000_0000
-0001b2 d064                      	rcall write_symbol
+0001a0 d070                      	rcall write_symbol
+0001a1 e190                      	ldi SYMBOL, 0b0001_0000
+0001a2 d06e                      	rcall write_symbol
+0001a3 e191                      	ldi SYMBOL, 0b0001_0001
+0001a4 d06c                      	rcall write_symbol
+0001a5 e191                      	ldi SYMBOL, 0b0001_0001
+0001a6 d06a                      	rcall write_symbol
+0001a7 e191                      	ldi SYMBOL, 0b0001_0001
+0001a8 d068                      	rcall write_symbol
+0001a9 e090                      	ldi SYMBOL, 0b0000_0000
+0001aa d066                      	rcall write_symbol
+0001ab e090                      	ldi SYMBOL, 0b0000_0000
+0001ac d064                      	rcall write_symbol
                                  	; enable row 6
-0001b3 d051                      	rcall enable_row_6
-0001b4 df29                      	rcall enableLatch
+0001ad d051                      	rcall enable_row_6
+0001ae df29                      	rcall enableLatch
                                  
                                  	; enable columns of row 7
-0001b5 e090                      	ldi SYMBOL, 0b0000_0000
-0001b6 d060                      	rcall write_symbol
-0001b7 e090                      	ldi SYMBOL, 0b0000_0000
-0001b8 d05e                      	rcall write_symbol
-0001b9 e191                      	ldi SYMBOL, 0b0001_0001
-0001ba d05c                      	rcall write_symbol
-0001bb e19f                      	ldi SYMBOL, 0b0001_1111
-0001bc d05a                      	rcall write_symbol
-0001bd e094                      	ldi SYMBOL, 0b0000_0100
-0001be d058                      	rcall write_symbol
-0001bf e09e                      	ldi SYMBOL, 0b0000_1110
-0001c0 d056                      	rcall write_symbol
+0001af e090                      	ldi SYMBOL, 0b0000_0000
+0001b0 d060                      	rcall write_symbol
+0001b1 e090                      	ldi SYMBOL, 0b0000_0000
+0001b2 d05e                      	rcall write_symbol
+0001b3 e191                      	ldi SYMBOL, 0b0001_0001
+0001b4 d05c                      	rcall write_symbol
+0001b5 e19f                      	ldi SYMBOL, 0b0001_1111
+0001b6 d05a                      	rcall write_symbol
+0001b7 e094                      	ldi SYMBOL, 0b0000_0100
+0001b8 d058                      	rcall write_symbol
+0001b9 e09e                      	ldi SYMBOL, 0b0000_1110
+0001ba d056                      	rcall write_symbol
+0001bb e090                      	ldi SYMBOL, 0b0000_0000
+0001bc d054                      	rcall write_symbol
+0001bd e090                      	ldi SYMBOL, 0b0000_0000
+0001be d052                      	rcall write_symbol
+0001bf e090                      	ldi SYMBOL, 0b0000_0000
+0001c0 d050                      	rcall write_symbol
 0001c1 e090                      	ldi SYMBOL, 0b0000_0000
-0001c2 d054                      	rcall write_symbol
-0001c3 e090                      	ldi SYMBOL, 0b0000_0000
-0001c4 d052                      	rcall write_symbol
-0001c5 e090                      	ldi SYMBOL, 0b0000_0000
-0001c6 d050                      	rcall write_symbol
-0001c7 e090                      	ldi SYMBOL, 0b0000_0000
-0001c8 d04e                      	rcall write_symbol
+0001c2 d04e                      	rcall write_symbol
+0001c3 e19f                      	ldi SYMBOL, 0b0001_1111
+0001c4 d04c                      	rcall write_symbol
+0001c5 e191                      	ldi SYMBOL, 0b0001_0001
+0001c6 d04a                      	rcall write_symbol
+0001c7 e191                      	ldi SYMBOL, 0b0001_0001
+0001c8 d048                      	rcall write_symbol
 0001c9 e19f                      	ldi SYMBOL, 0b0001_1111
-0001ca d04c                      	rcall write_symbol
-0001cb e191                      	ldi SYMBOL, 0b0001_0001
-0001cc d04a                      	rcall write_symbol
-0001cd e191                      	ldi SYMBOL, 0b0001_0001
-0001ce d048                      	rcall write_symbol
-0001cf e19f                      	ldi SYMBOL, 0b0001_1111
-0001d0 d046                      	rcall write_symbol
-0001d1 e090                      	ldi SYMBOL, 0b0000_0000
-0001d2 d044                      	rcall write_symbol
-0001d3 e090                      	ldi SYMBOL, 0b0000_0000
-0001d4 d042                      	rcall write_symbol
+0001ca d046                      	rcall write_symbol
+0001cb e090                      	ldi SYMBOL, 0b0000_0000
+0001cc d044                      	rcall write_symbol
+0001cd e090                      	ldi SYMBOL, 0b0000_0000
+0001ce d042                      	rcall write_symbol
                                  	; enable row 7
-0001d5 d038                      	rcall enable_row_7
-0001d6 df07                      	rcall enableLatch
-0001d7 9508                      	ret
+0001cf d038                      	rcall enable_row_7
+0001d0 df07                      	rcall enableLatch
+0001d1 9508                      	ret
                                  
                                  enable_row_1:
-0001d8 defd                      	rcall write_0
-0001d9 defc                      	rcall write_0
-0001da defb                      	rcall write_0
-0001db defa                      	rcall write_0
-0001dc def9                      	rcall write_0
-0001dd def8                      	rcall write_0
-0001de def7                      	rcall write_0
-0001df defa                      	rcall write_1
-0001e0 9508                      	ret
+0001d2 defd                      	rcall write_0
+0001d3 defc                      	rcall write_0
+0001d4 defb                      	rcall write_0
+0001d5 defa                      	rcall write_0
+0001d6 def9                      	rcall write_0
+0001d7 def8                      	rcall write_0
+0001d8 def7                      	rcall write_0
+0001d9 defa                      	rcall write_1
+0001da 9508                      	ret
                                  
                                  enable_row_2:
-0001e1 def4                      	rcall write_0
-0001e2 def3                      	rcall write_0
-0001e3 def2                      	rcall write_0
-0001e4 def1                      	rcall write_0
-0001e5 def0                      	rcall write_0
-0001e6 deef                      	rcall write_0
-0001e7 def2                      	rcall write_1
-0001e8 deed                      	rcall write_0
-0001e9 9508                      	ret
+0001db def4                      	rcall write_0
+0001dc def3                      	rcall write_0
+0001dd def2                      	rcall write_0
+0001de def1                      	rcall write_0
+0001df def0                      	rcall write_0
+0001e0 deef                      	rcall write_0
+0001e1 def2                      	rcall write_1
+0001e2 deed                      	rcall write_0
+0001e3 9508                      	ret
                                  
                                  enable_row_3:
-0001ea deeb                      	rcall write_0
-0001eb deea                      	rcall write_0
-0001ec dee9                      	rcall write_0
-0001ed dee8                      	rcall write_0
-0001ee dee7                      	rcall write_0
-0001ef deea                      	rcall write_1
-0001f0 dee5                      	rcall write_0
-0001f1 dee4                      	rcall write_0
-0001f2 9508                      	ret
+0001e4 deeb                      	rcall write_0
+0001e5 deea                      	rcall write_0
+0001e6 dee9                      	rcall write_0
+0001e7 dee8                      	rcall write_0
+0001e8 dee7                      	rcall write_0
+0001e9 deea                      	rcall write_1
+0001ea dee5                      	rcall write_0
+0001eb dee4                      	rcall write_0
+0001ec 9508                      	ret
                                  
                                  enable_row_4:
-0001f3 dee2                      	rcall write_0
-0001f4 dee1                      	rcall write_0
-0001f5 dee0                      	rcall write_0
-0001f6 dedf                      	rcall write_0
-0001f7 dee2                      	rcall write_1
-0001f8 dedd                      	rcall write_0
-0001f9 dedc                      	rcall write_0
-0001fa dedb                      	rcall write_0
-0001fb 9508                      	ret
+0001ed dee2                      	rcall write_0
+0001ee dee1                      	rcall write_0
+0001ef dee0                      	rcall write_0
+0001f0 dedf                      	rcall write_0
+0001f1 dee2                      	rcall write_1
+0001f2 dedd                      	rcall write_0
+0001f3 dedc                      	rcall write_0
+0001f4 dedb                      	rcall write_0
+0001f5 9508                      	ret
                                  
                                  enable_row_5:
-0001fc ded9                      	rcall write_0
-0001fd ded8                      	rcall write_0
-0001fe ded7                      	rcall write_0
-0001ff deda                      	rcall write_1
-000200 ded5                      	rcall write_0
-000201 ded4                      	rcall write_0
-000202 ded3                      	rcall write_0
-000203 ded2                      	rcall write_0
-000204 9508                      	ret
+0001f6 ded9                      	rcall write_0
+0001f7 ded8                      	rcall write_0
+0001f8 ded7                      	rcall write_0
+0001f9 deda                      	rcall write_1
+0001fa ded5                      	rcall write_0
+0001fb ded4                      	rcall write_0
+0001fc ded3                      	rcall write_0
+0001fd ded2                      	rcall write_0
+0001fe 9508                      	ret
                                  
                                  enable_row_6:
-000205 ded0                      	rcall write_0
-000206 decf                      	rcall write_0
-000207 ded2                      	rcall write_1
-000208 decd                      	rcall write_0
-000209 decc                      	rcall write_0
-00020a decb                      	rcall write_0
-00020b deca                      	rcall write_0
-00020c dec9                      	rcall write_0
-00020d 9508                      	ret
+0001ff ded0                      	rcall write_0
+000200 decf                      	rcall write_0
+000201 ded2                      	rcall write_1
+000202 decd                      	rcall write_0
+000203 decc                      	rcall write_0
+000204 decb                      	rcall write_0
+000205 deca                      	rcall write_0
+000206 dec9                      	rcall write_0
+000207 9508                      	ret
                                  	
                                  enable_row_7:
-00020e dec7                      	rcall write_0
-00020f deca                      	rcall write_1
-000210 dec5                      	rcall write_0
-000211 dec4                      	rcall write_0
-000212 dec3                      	rcall write_0
-000213 dec2                      	rcall write_0
-000214 dec1                      	rcall write_0
-000215 dec0                      	rcall write_0
-000216 9508                      	ret
+000208 dec7                      	rcall write_0
+000209 deca                      	rcall write_1
+00020a dec5                      	rcall write_0
+00020b dec4                      	rcall write_0
+00020c dec3                      	rcall write_0
+00020d dec2                      	rcall write_0
+00020e dec1                      	rcall write_0
+00020f dec0                      	rcall write_0
+000210 9508                      	ret
                                  
                                  ; all print functions will display a specific character 
                                  ; on one single cell of the matrix led (cell = 7 rows x 5 cols)
@@ -1789,55 +1781,55 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm(61): Inclu
                                  	; load the value on register SYMBOL and convert it on led symbol
                                  	; ex : if SYMBOL = 0b01000 -> turn on the second led of selected cell 
                                  	symb0:
-000217 ff90                      		sbrs SYMBOL,0 ; skip if bit set
-000218 c00e                      		rjmp symb0_is_0
+000211 ff90                      		sbrs SYMBOL,0 ; skip if bit set
+000212 c00e                      		rjmp symb0_is_0
                                  		symb0_is_1:
-000219 dec0                      			rcall write_1
+000213 dec0                      			rcall write_1
                                  	symb1:
-00021a ff91                      		sbrs SYMBOL,1 ; skip if bit set
-00021b c00d                      		rjmp symb1_is_0
+000214 ff91                      		sbrs SYMBOL,1 ; skip if bit set
+000215 c00d                      		rjmp symb1_is_0
                                  		symb1_is_1:
-00021c debd                      			rcall write_1
+000216 debd                      			rcall write_1
                                  	symb2:
-00021d ff92                      		sbrs SYMBOL,2 ; skip if bit set
-00021e c00c                      		rjmp symb2_is_0
+000217 ff92                      		sbrs SYMBOL,2 ; skip if bit set
+000218 c00c                      		rjmp symb2_is_0
                                  		symb2_is_1:
-00021f deba                      			rcall write_1
+000219 deba                      			rcall write_1
                                  	symb3:
-000220 ff93                      		sbrs SYMBOL,3 ; skip if bit set
-000221 c00b                      		rjmp symb3_is_0
+00021a ff93                      		sbrs SYMBOL,3 ; skip if bit set
+00021b c00b                      		rjmp symb3_is_0
                                  		symb3_is_1:
-000222 deb7                      			rcall write_1
+00021c deb7                      			rcall write_1
                                  	symb4:
-000223 ff94                      		sbrs SYMBOL,4 ; skip if bit set
-000224 c00a                      		rjmp symb4_is_0
+00021d ff94                      		sbrs SYMBOL,4 ; skip if bit set
+00021e c00a                      		rjmp symb4_is_0
                                  		symb4_is_1:
-000225 deb4                      			rcall write_1
-000226 c00a                      			rjmp symb_ended
+00021f deb4                      			rcall write_1
+000220 c00a                      			rjmp symb_ended
                                  
                                  	symb0_is_0:
-000227 deae                      		rcall write_0
-000228 cff1                      		rjmp symb1
+000221 deae                      		rcall write_0
+000222 cff1                      		rjmp symb1
                                  
                                  	symb1_is_0:
-000229 deac                      		rcall write_0
-00022a cff2                      		rjmp symb2
+000223 deac                      		rcall write_0
+000224 cff2                      		rjmp symb2
                                  
                                  	symb2_is_0:
-00022b deaa                      		rcall write_0
-00022c cff3                      		rjmp symb3
+000225 deaa                      		rcall write_0
+000226 cff3                      		rjmp symb3
                                  
                                  	symb3_is_0:
-00022d dea8                      		rcall write_0
-00022e cff4                      		rjmp symb4
+000227 dea8                      		rcall write_0
+000228 cff4                      		rjmp symb4
                                  
                                  	symb4_is_0:
-00022f dea6                      		rcall write_0
-000230 c000                      		rjmp symb_ended
+000229 dea6                      		rcall write_0
+00022a c000                      		rjmp symb_ended
                                  	
                                  	symb_ended:
                                  .include "Rules.inc"
-000231 9508                      
+00022b 9508                      
                                   * Rules.inc
                                   *
                                   *  Created: 5/19/2018 2:11:17 PM
@@ -1845,70 +1837,70 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm(61): Inclu
                                   */ 
                                  
                                  checkRules:
-000232 d002                      	rcall deathRules
-000233 d019                      	rcall eatRules
-000234 9508                      	ret
+00022c d002                      	rcall deathRules
+00022d d019                      	rcall eatRules
+00022e 9508                      	ret
                                  
                                  deathRules:
                                  	; here POS_X and POS_Y are just registers with different meaning
-000235 e0d1                      	ldi YH, HIGH(HEADYADDR)
-000236 e0c1                      	ldi YL, LOW(HEADYADDR)
-000237 95c3                      	inc YL ; to jump on body address
-000238 2f67                      	mov COUNTER_MOVE, LENGTH
+00022f e0d1                      	ldi YH, HIGH(HEADYADDR)
+000230 e0c1                      	ldi YL, LOW(HEADYADDR)
+000231 95c3                      	inc YL ; to jump on body address
+000232 2f67                      	mov COUNTER_MOVE, LENGTH
                                  	for_death:
-000239 9140 0100                 		lds POS_X, HEADXADDR
-00023b 3061                      		cpi COUNTER_MOVE, 1
-00023c f079                      		breq death_ended
-00023d 9139                      		ld POS_Y, Y+ ; POS_Y contains the X pos of next point
-00023e 1743                      		cp POS_X, POS_Y
-00023f f019                      		breq collision_x
-000240 95c3                      		inc YL ; to check next X
-000241 956a                      		dec COUNTER_MOVE
-000242 cff6                      		rjmp for_death
+000233 9140 0100                 		lds POS_X, HEADXADDR
+000235 3061                      		cpi COUNTER_MOVE, 1
+000236 f079                      		breq death_ended
+000237 9139                      		ld POS_Y, Y+ ; POS_Y contains the X pos of next point
+000238 1743                      		cp POS_X, POS_Y
+000239 f019                      		breq collision_x
+00023a 95c3                      		inc YL ; to check next X
+00023b 956a                      		dec COUNTER_MOVE
+00023c cff6                      		rjmp for_death
                                  
                                  		collision_x:
                                  			; check for xy collision
-000243 9140 0101                 			lds POS_X, HEADYADDR
-000245 9139                      			ld POS_Y, Y+ ; POS_Y contains the Y pos of body point
-000246 1743                      			cp POS_X, POS_Y
-000247 f011                      			breq on_death
-000248 956a                      			dec COUNTER_MOVE
-000249 cfef                      			rjmp for_death
+00023d 9140 0101                 			lds POS_X, HEADYADDR
+00023f 9139                      			ld POS_Y, Y+ ; POS_Y contains the Y pos of body point
+000240 1743                      			cp POS_X, POS_Y
+000241 f011                      			breq on_death
+000242 956a                      			dec COUNTER_MOVE
+000243 cfef                      			rjmp for_death
                                  
                                  		on_death:
-00024a e080                      			ldi GAME_STATE, 0 ; game over
-00024b c000                      			rjmp death_ended
+000244 e080                      			ldi GAME_STATE, 0 ; game over
+000245 c000                      			rjmp death_ended
                                  
                                  	death_ended:
-00024c 9508                      	ret
+000246 9508                      	ret
                                  
                                  
                                  eatRules:
                                  	; here POS_X and POS_Y are just registers with different meaning
-00024d 9140 0100                 	lds POS_X, HEADXADDR
-00024f 9130 0200                 	lds POS_Y, FRUITXADDR
+000247 9140 0100                 	lds POS_X, HEADXADDR
+000249 9130 0200                 	lds POS_Y, FRUITXADDR
                                  	; check if matching in x positions
-000251 1743                      	cp POS_X, POS_Y
-000252 f009                      	breq match_pos_x
-000253 c00a                      	rjmp eat_ended
+00024b 1743                      	cp POS_X, POS_Y
+00024c f009                      	breq match_pos_x
+00024d c00a                      	rjmp eat_ended
                                  
                                  	match_pos_x:
                                  		; check if matching in y positions
-000254 9140 0101                 		lds POS_X, HEADYADDR
-000256 9130 0201                 		lds POS_Y, FRUITYADDR
-000258 1743                      		cp POS_X, POS_Y
-000259 f009                      		breq match_pos_xy
-00025a c003                      		rjmp eat_ended
+00024e 9140 0101                 		lds POS_X, HEADYADDR
+000250 9130 0201                 		lds POS_Y, FRUITYADDR
+000252 1743                      		cp POS_X, POS_Y
+000253 f009                      		breq match_pos_xy
+000254 c003                      		rjmp eat_ended
                                  
                                  	match_pos_xy:
                                  		; if both x and y pos matched
-00025b d00d                      		rcall nextRandomPos
-00025c 9573                      		inc LENGTH
-00025d c000                      		rjmp eat_ended
+000255 d00d                      		rcall nextRandomPos
+000256 9573                      		inc LENGTH
+000257 c000                      		rjmp eat_ended
                                  
                                  	eat_ended:
                                  .include "RandomGen.inc"
-00025e 9508                      
+000258 9508                      
                                   * RandomGen.inc
                                   *
                                   *  Created: 5/19/2018 2:12:22 PM
@@ -1917,159 +1909,159 @@ C:\Users\Vador\Documents\Atmel Studio\7.0\SnakeRAM\SnakeLast\main.asm(61): Inclu
                                  
                                  randomXpos:
                                  	; performs a modulo 80 of the random register
-00025f 3520                      	cpi RANDOM_POS, 80
-000260 f010                      	brlo randXend
-000261 5520                      	subi RANDOM_POS, 80
-000262 cffc                      	rjmp randomXpos
+000259 3520                      	cpi RANDOM_POS, 80
+00025a f010                      	brlo randXend
+00025b 5520                      	subi RANDOM_POS, 80
+00025c cffc                      	rjmp randomXpos
                                  	randXend:
-000263 9508                      		ret
+00025d 9508                      		ret
                                  
                                  randomYpos:
                                  	; performs a modulo 7 of the random register
-000264 3027                      	cpi RANDOM_POS, 7
-000265 f010                      	brlo randYend
-000266 5027                      	subi RANDOM_POS, 7
-000267 cffc                      	rjmp randomYpos
+00025e 3027                      	cpi RANDOM_POS, 7
+00025f f010                      	brlo randYend
+000260 5027                      	subi RANDOM_POS, 7
+000261 cffc                      	rjmp randomYpos
                                  	randYend:
-000268 9508                      		ret
+000262 9508                      		ret
                                  
                                  nextRandomPos:
                                  	; pseudo random number generator using Fibonacci
                                  	; random x
-000269 9140 0200                 	lds POS_X, FRUITXADDR
-00026b 9130 0202                 	lds POS_Y, FRUITXADDR2
-00026d 934f                      	push POS_X
-00026e 0f43                      	add POS_X, POS_Y
-00026f 2f24                      	mov RANDOM_POS, POS_X
-000270 914f                      	pop POS_X
-000271 dfed                      	rcall randomXpos
-000272 9320 0200                 	sts FRUITXADDR, RANDOM_POS
-000274 9340 0202                 	sts FRUITXADDR2, POS_X
+000263 9140 0200                 	lds POS_X, FRUITXADDR
+000265 9130 0202                 	lds POS_Y, FRUITXADDR2
+000267 934f                      	push POS_X
+000268 0f43                      	add POS_X, POS_Y
+000269 2f24                      	mov RANDOM_POS, POS_X
+00026a 914f                      	pop POS_X
+00026b dfed                      	rcall randomXpos
+00026c 9320 0200                 	sts FRUITXADDR, RANDOM_POS
+00026e 9340 0202                 	sts FRUITXADDR2, POS_X
                                  	
                                  	; random y
-000276 9130 0201                 	lds POS_Y, FRUITYADDR
-000278 9140 0203                 	lds POS_X, FRUITYADDR2
-00027a 933f                      	push POS_Y
-00027b 0f34                      	add POS_Y, POS_X
-00027c 2f23                      	mov RANDOM_POS, POS_Y
-00027d 913f                      	pop POS_Y
-00027e dfe5                      	rcall randomYpos
-00027f 9320 0201                 	sts FRUITYADDR, RANDOM_POS
-000281 9330 0203                 	sts FRUITYADDR2, POS_Y
-000283 9508                      
+000270 9130 0201                 	lds POS_Y, FRUITYADDR
+000272 9140 0203                 	lds POS_X, FRUITYADDR2
+000274 933f                      	push POS_Y
+000275 0f34                      	add POS_Y, POS_X
+000276 2f23                      	mov RANDOM_POS, POS_Y
+000277 913f                      	pop POS_Y
+000278 dfe5                      	rcall randomYpos
+000279 9320 0201                 	sts FRUITYADDR, RANDOM_POS
+00027b 9330 0203                 	sts FRUITYADDR2, POS_Y
+00027d 9508                      
                                  init:
                                  	; config pins
-000284 d02c                      	rcall configDispPin
-000285 d026                      	rcall configRowKb
-000286 d031                      	rcall configDebugLed
+00027e d02c                      	rcall configDispPin
+00027f d026                      	rcall configRowKb
+000280 d031                      	rcall configDebugLed
                                  	
                                  	; set all Snake initial conditions 
-000287 d036                      	rcall initialConditions
+000281 d036                      	rcall initialConditions
                                  
                                  	; config display timer 
-000288 ec0e                      	ldi R16,COUNTER_OFFSET 
-000289 bd06                      	out TCNT0,R16 ; set counter init
-00028a e003                      	ldi R16,0b0000_0011 ; set prescaler to 64 (COUNTER_OFFSET = 206 -> f = 5kHz)
-00028b bd05                      	out TCCR0B,R16 ; timer is configured with prescaler 
+000282 ec0e                      	ldi R16,COUNTER_OFFSET 
+000283 bd06                      	out TCNT0,R16 ; set counter init
+000284 e003                      	ldi R16,0b0000_0011 ; set prescaler to 64 (COUNTER_OFFSET = 206 -> f = 5kHz)
+000285 bd05                      	out TCCR0B,R16 ; timer is configured with prescaler 
                                  	;(timer begins)
                                  
                                  	; config ISR timer for periodic motion
-00028c 9478                      	sei ; set the global interrupt flag
-00028d e001                      	ldi R16,0b0000_0001 ; register for ISR config
-00028e 9300 006f                 	sts TIMSK1, R16 ; enable ISR for timer 1
-000290 ef09                      	ldi R16, COUNTER_OFFSET_MOVE_H
-000291 9300 0085                 	sts TCNT1H,R16
-000293 ee06                      	ldi R16, COUNTER_OFFSET_MOVE_L
-000294 9300 0084                 	sts TCNT1L,R16 ; set counter init
-000296 e005                      	ldi R16,0b0000_0101 ; set prescaler to 1024
-000297 9300 0081                 	sts TCCR1B,R16 ; timer is configured with prescaler 
+000286 9478                      	sei ; set the global interrupt flag
+000287 e001                      	ldi R16,0b0000_0001 ; register for ISR config
+000288 9300 006f                 	sts TIMSK1, R16 ; enable ISR for timer 1
+00028a ef09                      	ldi R16, COUNTER_OFFSET_MOVE_H
+00028b 9300 0085                 	sts TCNT1H,R16
+00028d ee06                      	ldi R16, COUNTER_OFFSET_MOVE_L
+00028e 9300 0084                 	sts TCNT1L,R16 ; set counter init
+000290 e005                      	ldi R16,0b0000_0101 ; set prescaler to 1024
+000291 9300 0081                 	sts TCCR1B,R16 ; timer is configured with prescaler 
                                  	;(timer begins)
                                  
-000299 dd9e                      	rcall KApressed ; automatically push the key A to begin the game 
-00029a c000                      	rjmp main
+000293 dd9e                      	rcall KApressed ; automatically push the key A to begin the game 
+000294 c000                      	rjmp main
                                  
                                  main:
-00029b dd7f                      	rcall checkKeyboard
-00029c 3080                      	cpi GAME_STATE, 0
-00029d f019                      	breq game_over
+000295 dd85                      	rcall checkKeyboard
+000296 3080                      	cpi GAME_STATE, 0
+000297 f019                      	breq game_over
                                  	play:
-00029e df93                      		rcall checkRules
+000298 df93                      		rcall checkRules
                                  		;rcall move ;in ISR
-00029f de09                      		rcall display
-0002a0 cffa                      		rjmp main
+000299 de09                      		rcall display
+00029a cffa                      		rjmp main
                                  
                                  	game_over:
-0002a1 de47                      		rcall displayGameOver
-0002a2 cff8                      		rjmp main
-0002a3 cff7                      	rjmp main
+00029b de47                      		rcall displayGameOver
+00029c cff8                      		rjmp main
+00029d cff7                      	rjmp main
                                  
                                  
                                  ISRmove:
                                  	;cbi PORTC,2 ; switch led 2
-0002a4 dd9f                      	rcall move
-0002a5 ef09                      	ldi R16, COUNTER_OFFSET_MOVE_H
-0002a6 9300 0085                 	sts TCNT1H,R16
-0002a8 ee06                      	ldi R16, COUNTER_OFFSET_MOVE_L
-0002a9 9300 0084                 	sts TCNT1L,R16
-0002ab 9518                      	reti
+00029e dd9f                      	rcall move
+00029f ef09                      	ldi R16, COUNTER_OFFSET_MOVE_H
+0002a0 9300 0085                 	sts TCNT1H,R16
+0002a2 ee06                      	ldi R16, COUNTER_OFFSET_MOVE_L
+0002a3 9300 0084                 	sts TCNT1L,R16
+0002a5 9518                      	reti
                                  
                                  
                                  configRowKb:
-0002ac ef00                      	ldi R16, 0b1111_0000 ; 4 row output mode, 4 col input mode
-0002ad b90a                      	out DDRD, R16
-0002ae e00f                      	ldi R16, 0b0000_1111 ; rows -> low, cols -> enable pull up resistors
-0002af b90b                      	out PORTD, R16
-0002b0 9508                      	ret
+0002a6 ef00                      	ldi R16, 0b1111_0000 ; 4 row output mode, 4 col input mode
+0002a7 b90a                      	out DDRD, R16
+0002a8 ef0f                      	ldi R16, 0b1111_1111 ; rows -> low, cols -> enable pull up resistors
+0002a9 b90b                      	out PORTD, R16
+0002aa 9508                      	ret
                                  
                                  configDispPin:
-0002b1 9a23                      	sbi DDRB,3
-0002b2 982b                      	cbi PORTB,3
-0002b3 9a24                      	sbi DDRB,4
-0002b4 982c                      	cbi PORTB,4
-0002b5 9a25                      	sbi DDRB,5
-0002b6 982d                      	cbi PORTB,5
-0002b7 9508                      	ret
+0002ab 9a23                      	sbi DDRB,3
+0002ac 982b                      	cbi PORTB,3
+0002ad 9a24                      	sbi DDRB,4
+0002ae 982c                      	cbi PORTB,4
+0002af 9a25                      	sbi DDRB,5
+0002b0 982d                      	cbi PORTB,5
+0002b1 9508                      	ret
                                  
                                  configDebugLed:
-0002b8 9a21                      	sbi DDRB,1 ; buzzer configured as output
-0002b9 9a3a                      	sbi DDRC,2
-0002ba 9a3b                      	sbi DDRC,3
-0002bb 9a42                      	sbi PORTC,2
-0002bc 9a43                      	sbi PORTC,3
-0002bd 9508                      	ret
+0002b2 9a21                      	sbi DDRB,1 ; buzzer configured as output
+0002b3 9a3a                      	sbi DDRC,2
+0002b4 9a3b                      	sbi DDRC,3
+0002b5 9a42                      	sbi PORTC,2
+0002b6 9a43                      	sbi PORTC,3
+0002b7 9508                      	ret
                                  
                                  initialConditions:
                                  	; initial game state
-0002be e082                      	ldi GAME_STATE, 2 ; play 
+0002b8 e082                      	ldi GAME_STATE, 2 ; play 
                                  	; initial length
-0002bf e073                      	ldi LENGTH, INIT_LENGTH
+0002b9 e073                      	ldi LENGTH, INIT_LENGTH
                                  
                                  	; head position initial
-0002c0 e344                      	ldi POS_X, 52
+0002ba e344                      	ldi POS_X, 52
+0002bb e032                      	ldi POS_Y, 2
+0002bc 9340 0100                 	sts HEADXADDR, POS_X 
+0002be 9330 0101                 	sts HEADYADDR, POS_Y
+                                 
+                                 	; head position initial
+0002c0 e343                      	ldi POS_X, 51
 0002c1 e032                      	ldi POS_Y, 2
-0002c2 9340 0100                 	sts HEADXADDR, POS_X 
-0002c4 9330 0101                 	sts HEADYADDR, POS_Y
+0002c2 9340 0102                 	sts 0x0102, POS_X
+0002c4 9330 0103                 	sts 0x0103, POS_Y
                                  
                                  	; head position initial
-0002c6 e343                      	ldi POS_X, 51
+0002c6 e342                      	ldi POS_X, 50
 0002c7 e032                      	ldi POS_Y, 2
-0002c8 9340 0102                 	sts 0x0102, POS_X
-0002ca 9330 0103                 	sts 0x0103, POS_Y
-                                 
-                                 	; head position initial
-0002cc e342                      	ldi POS_X, 50
-0002cd e032                      	ldi POS_Y, 2
-0002ce 9340 0104                 	sts 0x0104, POS_X
-0002d0 9330 0105                 	sts 0x0105, POS_Y
+0002c8 9340 0104                 	sts 0x0104, POS_X
+0002ca 9330 0105                 	sts 0x0105, POS_Y
                                  
                                  	; fruit position initial
-0002d2 e14e                      	ldi POS_X, 30
-0002d3 e032                      	ldi POS_Y, 2
-0002d4 9340 0202                 	sts FRUITXADDR2, POS_X
-0002d6 9330 0203                 	sts FRUITYADDR2, POS_Y
+0002cc e14e                      	ldi POS_X, 30
+0002cd e032                      	ldi POS_Y, 2
+0002ce 9340 0202                 	sts FRUITXADDR2, POS_X
+0002d0 9330 0203                 	sts FRUITYADDR2, POS_Y
                                  
                                  	; initial direction -> none
-0002d8 e051                      	ldi V, 0b0000_0001
+0002d2 e051                      	ldi V, 0b0000_0001
 
 
 RESOURCE USE INFORMATION
@@ -2107,19 +2099,19 @@ cpi   :  21 cpse  :   0 dec   :   9 eor   :   0 fmul  :   0 fmuls :   0
 fmulsu:   0 icall :   0 ijmp  :   0 in    :   0 inc   :   5 jmp   :   0 
 ld    :   6 ldd   :   0 ldi   : 157 lds   :  14 lpm   :   0 lsl   :   0 
 lsr   :   0 mov   :   6 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   2 or    :   0 ori   :   0 out   :   5 pop   :   6 
+neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :   5 pop   :   6 
 push  :   6 rcall : 226 ret   :  33 reti  :   1 rjmp  :  66 rol   :   0 
-ror   :   0 sbc   :   0 sbci  :   0 sbi   :  19 sbic  :   0 sbis  :   6 
+ror   :   0 sbc   :   0 sbci  :   0 sbi   :  15 sbic  :   0 sbis  :   6 
 sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   5 sec   :   0 seh   :   0 
 sei   :   1 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
 sez   :   0 sleep :   0 spm   :   0 st    :   4 std   :   0 sts   :  20 
 sub   :   0 subi  :   7 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 28 out of 113 (24.8%)
+Instructions used: 27 out of 113 (23.9%)
 
 "ATmega328P" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x0005b4   1410      0   1410   32768   4.3%
+[.cseg] 0x000000 0x0005a8   1398      0   1398   32768   4.3%
 [.dseg] 0x000100 0x000100      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 

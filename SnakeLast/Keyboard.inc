@@ -9,21 +9,12 @@ checkKeyboard:
 	; 4 steps keyboard check
 	; check row 3
 	cbi PORTD,5
-	sbi PORTD,4
-	sbi PORTD,6
-	sbi PORTD,7
-	nop
-
 	sbis PIND,1
 	rjmp K3pressed
+	sbi PORTD,5
 
 	; check row 4
 	cbi PORTD,4
-	sbi PORTD,5
-	sbi PORTD,6
-	sbi PORTD,7
-	nop
-
 	sbis PIND,0
 	rjmp KCpressed
 	sbis PIND,1
@@ -32,6 +23,7 @@ checkKeyboard:
 	rjmp K0pressed
 	sbis PIND,3
 	rjmp KApressed
+	sbi PORTD,4
 
 end_keyboard:
 	ret

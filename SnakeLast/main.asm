@@ -120,7 +120,7 @@ ISRmove:
 configRowKb:
 	ldi R16, 0b1111_0000 ; 4 row output mode, 4 col input mode
 	out DDRD, R16
-	ldi R16, 0b0000_1111 ; rows -> low, cols -> enable pull up resistors
+	ldi R16, 0b1111_1111 ; rows -> low, cols -> enable pull up resistors
 	out PORTD, R16
 	ret
 
