@@ -20,7 +20,7 @@
 
 ; define constants:
 ; timer counters
-.equ COUNTER_OFFSET = 206
+.equ COUNTER_OFFSET = 131
 .equ COUNTER_OFFSET_MOVE_L = 0xE6
 .equ COUNTER_OFFSET_MOVE_H = 0xF9
 
