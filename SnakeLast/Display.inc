@@ -6,6 +6,7 @@
  */ 
 
  display:
+	cli
 	ldi XH, HIGH(HEADXADDR)
 	ldi XL, LOW(HEADXADDR)
 	; plot the snake
@@ -29,6 +30,7 @@
 		lds SYMBOL, FRUITYADDR ; symbol = posY
 		rcall plot_posY
 		rcall enableLatch
+		sei
 		ret
 
 plot_posX:

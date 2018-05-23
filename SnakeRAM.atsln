@@ -15,6 +15,8 @@ Project("{18226A42-8477-4023-8AD2-40C49DA407C9}") = "randomGenerator", "randomGe
 EndProject
 Project("{18226A42-8477-4023-8AD2-40C49DA407C9}") = "SnakeLast", "SnakeLast\SnakeLast.asmproj", "{5926B337-BD60-487E-949A-FAE9C0BCB466}"
 EndProject
+Project("{18226A42-8477-4023-8AD2-40C49DA407C9}") = "SentProjo", "SentProjo\SentProjo.asmproj", "{E920855F-B9A2-40E2-9B77-267F60768EB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AVR = Debug|AVR
@@ -45,6 +47,10 @@ Global
 		{5926B337-BD60-487E-949A-FAE9C0BCB466}.Debug|AVR.Build.0 = Debug|AVR
 		{5926B337-BD60-487E-949A-FAE9C0BCB466}.Release|AVR.ActiveCfg = Release|AVR
 		{5926B337-BD60-487E-949A-FAE9C0BCB466}.Release|AVR.Build.0 = Release|AVR
+		{E920855F-B9A2-40E2-9B77-267F60768EB8}.Debug|AVR.ActiveCfg = Debug|AVR
+		{E920855F-B9A2-40E2-9B77-267F60768EB8}.Debug|AVR.Build.0 = Debug|AVR
+		{E920855F-B9A2-40E2-9B77-267F60768EB8}.Release|AVR.ActiveCfg = Release|AVR
+		{E920855F-B9A2-40E2-9B77-267F60768EB8}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

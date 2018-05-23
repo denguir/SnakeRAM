@@ -63,8 +63,8 @@ eatRules:
 
 	match_pos_xy:
 		; if both x and y pos matched
-		rcall nextRandomPos
 		inc LENGTH
+		rcall nextRandomPos
 		rjmp eat_ended
 
 	eat_ended:

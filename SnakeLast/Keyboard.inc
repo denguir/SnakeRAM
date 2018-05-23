@@ -22,6 +22,7 @@ checkKeyboard:
     rjmp K0pressed
     sbis PIND,3
     rjmp KApressed
+	rcall KAreleased
     sbi PORTD,4
     nop
 
@@ -64,16 +65,25 @@ KCpressed:
     rjmp end_keyboard
 
 KApressed:
-    ; begin button
-    rcall initialConditions
+	ldi R31, 1
+	rjmp end_keyboard
 
+KAreleased:
+    ; begin button
+	cpi R31, 0
+	breq notPressed
+
+    rcall initialConditions
     lds RANDOM_POS, TCNT1L
     rcall randomXpos
     sts FRUITXADDR, RANDOM_POS
     lds RANDOM_POS, TCNT1H
     rcall randomYpos
     sts FRUITYADDR, RANDOM_POS
-    rjmp end_keyboard
+
+	notPressed:
+		ldi R31, 0
+		rjmp end_keyboard
 
 
 

@@ -20,8 +20,8 @@
 
 ; define constants:
 ; timer counters
-.equ COUNTER_OFFSET = 131
-.equ COUNTER_OFFSET_MOVE_L = 0xE6
+.equ COUNTER_OFFSET = 206
+.equ COUNTER_OFFSET_MOVE_L = 0xC2
 .equ COUNTER_OFFSET_MOVE_H = 0xF9
 
 ; map size
@@ -49,6 +49,7 @@
 	rjmp init
 .org 0x001A
 	rjmp ISRmove
+
 
 ; include definition file of ATmega328P
 .include "m328pdef.inc"
@@ -115,7 +116,6 @@ ISRmove:
 	ldi R16, COUNTER_OFFSET_MOVE_L
 	sts TCNT1L,R16
 	reti
-
 
 configRowKb:
 	ldi R16, 0b1111_0000 ; 4 row output mode, 4 col input mode

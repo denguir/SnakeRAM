@@ -148,11 +148,11 @@ go_right:
 
 	boudary_up_right:
 		ldi POS_X, 0
-		rjmp go_left_end
+		rjmp go_right_end
 
 	boudary_down_right:
 		ldi POS_X, 40
-		rjmp go_left_end	
+		rjmp go_right_end	
 
 	do_go_right:
 		inc POS_X
